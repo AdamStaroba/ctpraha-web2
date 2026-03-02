@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="CT Praha e-shop – kancelářská technika, laminace, fólie a příslušenství." />
+  <title>CT Praha | E-shop</title>
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e8eef6;
+      --soft:#f6f7fb;
+      --shadow:0 12px 30px rgba(15,23,42,.08);
+      --shadow2:0 6px 18px rgba(15,23,42,.08);
+      --radius:18px;
+      --radius-sm:14px;
+      --container:1180px;
+
+      --brand:#e11d2e;
+      --brand-dark:#b70f1c;
+      --ring: 0 0 0 4px rgba(225,29,46,.22);
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(var(--container), calc(100% - 40px)); margin:0 auto; }
+
+    /* Header */
+    .header{
+      position: sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header__inner{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding: 14px 0;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .brand__mark{
+      width:42px; height:42px; border-radius:14px;
+      background:var(--brand); color:#fff;
+      display:grid; place-items:center;
+      font-weight:900; letter-spacing:.6px;
+      box-shadow:var(--shadow2);
+      user-select:none;
+    }
+    .brand__text strong{ display:block; }
+    .brand__text small{ display:block; color:var(--muted); font-size:12px; margin-top:2px; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-weight:800;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+      white-space:nowrap;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn:focus{ outline:none; box-shadow: var(--ring); }
+    .btn--primary{ background: var(--brand); color:#fff; box-shadow: var(--shadow2); }
+    .btn--primary:hover{ background: var(--brand-dark); }
+    .btn--ghost{ background: transparent; border-color: var(--border); }
+    .btn--ghost:hover{ background: var(--soft); }
+
+    /* Layout */
+    .page{
+      padding: 22px 0 56px;
+      background:
+        radial-gradient(900px 500px at 80% 10%, rgba(225,29,46,.10), transparent 55%),
+        radial-gradient(800px 500px at 20% 10%, rgba(15,23,42,.06), transparent 50%);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap: 14px;
+      align-items:start;
+    }
+
+    .panel{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding: 16px;
+    }
+
+    .toolbar{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      margin-bottom: 12px;
+    }
+    .search{
+      flex: 1 1 320px;
+      max-width: 520px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    input[type="search"], select{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font: inherit;
+      outline:none;
+    }
+    input[type="search"]:focus, select:focus{ box-shadow: var(--ring); border-color: rgba(225,29,46,.35); }
+
+    .cats{
+      display:grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .cat{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+      font-weight: 850;
+      color: var(--muted);
+    }
+    .cat:hover{ background: var(--soft); color: var(--text); }
+    .cat[aria-pressed="true"]{
+      border-color: rgba(225,29,46,.35);
+      background: rgba(225,29,46,.08);
+      color: var(--text);
+    }
+    .badge{
+      font-size: 12px;
+      font-weight: 900;
+      border:1px solid var(--border);
+      background: var(--soft);
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: rgba(15,23,42,.65);
+    }
+
+    /* Products */
+    .products{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+    .product{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 320px;
+    }
+    .pimg{
+      height: 160px;
+      background:
+        radial-gradient(400px 200px at 30% 40%, rgba(225,29,46,.14), transparent 60%),
+        radial-gradient(400px 200px at 70% 60%, rgba(15,23,42,.10), transparent 60%),
+        var(--soft);
+    }
+    .pbody{ padding: 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
+    .meta{ display:flex; gap:8px; flex-wrap:wrap; }
+    .tag{
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .product h3{ margin:0; font-size: 15px; }
+    .product p{ margin:0; color: var(--muted); font-size: 13px; }
+
+    .pfoot{
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .price{ font-weight: 950; letter-spacing: -.01em; }
+    .small{ font-size: 12px; color: var(--muted); }
+
+    /* Cart */
+    .cartTop{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .cartCount{
+      margin-left:auto;
+      font-weight: 950;
+      border:1px solid var(--border);
+      background: var(--soft);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .cartItems{
+      margin-top: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .cartItem{
+      border:1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .cartThumb{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      background: var(--soft);
+      border:1px solid var(--border);
+      flex:0 0 auto;
+    }
+    .cartItem strong{ display:block; font-size: 13px; }
+    .cartItem span{ display:block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .cartTotal{
+      margin-top: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight: 950;
+    }
+
+    /* Footer */
+    .footer{
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px){
+      .products{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+      .products{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 520px){
+      .products{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header" aria-label="E-shop navigace">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Zpět na hlavní web">
+        <span class="brand__mark" aria-hidden="true">CT</span>
+        <span class="brand__text">
+          <strong>CT Praha</strong>
+          <small>E-shop</small>
+        </span>
+      </a>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a>
+        <a class="btn btn--primary" href="index.html">Hlavní web</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="toolbar" aria-label="Nástroje e-shopu">
+        <div class="search">
+          <input id="q" type="search" placeholder="Hledat v e-shopu (např. fólie, laminace, toner…)" />
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+          <select id="sort" aria-label="Řazení">
+            <option value="reco">Doporučené</option>
+            <option value="name">Název A–Z</option>
+            <option value="priceAsc">Cena ↑</option>
+            <option value="priceDesc">Cena ↓</option>
+          </select>
+          <button class="btn btn--ghost" id="reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Sidebar -->
+        <aside class="panel" aria-label="Filtry a košík">
+          <div class="cartTop">
+            <strong>Kategorie</strong>
+            <span class="badge" id="countShown">0</span>
+          </div>
+
+          <div class="cats" id="cats">
+            <button class="cat" type="button" aria-pressed="true" data-cat="all">Vše <span class="badge" data-b="all">—</span></button>
+            <button class="cat" type="button" aria-pressed="false" data-cat="tech">Technika <span class="badge" data-b="tech">—</span></button>
+            <button class="cat" type="button" aria-pressed="false" data-cat="lam">Laminace <span class="badge" data-b="lam">—</span></button>
+            <button class="cat" type="button" aria-pressed="false" data-cat="folie">Fólie <span class="badge" data-b="folie">—</span></button>
+            <button class="cat" type="button" aria-pressed="false" data-cat="spot">Spotřební materiál <span class="badge" data-b="spot">—</span></button>
+          </div>
+
+          <div style="height:14px;"></div>
+
+          <div class="panel" style="box-shadow:none; padding:0; border:none;">
+            <div class="cartTop">
+              <strong>Košík (demo UI)</strong>
+              <span class="cartCount" id="cartCount">0</span>
+            </div>
+
+            <div class="cartItems" id="cartItems">
+              <!-- demo items -->
+            </div>
+
+            <div class="cartTotal">
+              <span>Celkem</span>
+              <span id="cartTotal">0 Kč</span>
+            </div>
+
+            <div style="height:10px;"></div>
+
+            <button class="btn btn--primary" type="button" style="width:100%;">Pokračovat (demo)</button>
+            <div style="height:8px;"></div>
+            <p class="small">Pozn.: Je to statická šablona. Napojení na reálný košík doděláš v backendu.</p>
+          </div>
+        </aside>
+
+        <!-- Products -->
+        <section class="panel" aria-label="Produkty">
+          <div class="products" id="products">
+            <article class="product" data-cat="tech" data-name="Multifunkční tiskárna A4" data-price="19990">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody">
+                <div class="meta"><span class="tag">Technika</span><span class="tag">Doporučené</span></div>
+                <h3>Multifunkční tiskárna A4</h3>
+                <p>Pro kanceláře. Konfigurace + servis.</p>
+              </div>
+              <div class="pfoot">
+                <span class="price">19 990 Kč</span>
+                <button class="btn btn--ghost add" type="button">Do košíku</button>
+              </div>
+            </article>
+
+            <article class="product" data-cat="lam" data-name="Laminátor A3" data-price="3490">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody">
+                <div class="meta"><span class="tag">Laminace</span><span class="tag">Provoz</span></div>
+                <h3>Laminátor A3</h3>
+                <p>Jednoduché ovládání, stabilní výkon.</p>
+              </div>
+              <div class="pfoot">
+                <span class="price">3 490 Kč</span>
+                <button class="btn btn--ghost add" type="button">Do košíku</button>
+              </div>
+            </article>
+
+            <article class="product" data-cat="folie" data-name="Ochranná fólie – čirá" data-price="590">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody">
+                <div class="meta"><span class="tag">Fólie</span><span class="tag">Čirá</span></div>
+                <h3>Ochranná fólie – čirá</h3>
+                <p>Pro ochranu povrchů, snadná aplikace.</p>
+              </div>
+              <div class="pfoot">
+                <span class="price">590 Kč</span>
+                <button class="btn btn--ghost add" type="button">Do košíku</button>
+              </div>
+            </article>
+
+            <article class="product" data-cat="spot" data-name="Laminační kapsy A4 (100 ks)" data-price="249">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody">
+                <div class="meta"><span class="tag">Spotřeba</span><span class="tag">A4</span></div>
+                <h3>Laminační kapsy A4 (100 ks)</h3>
+                <p>Různé tloušťky dle použití.</p>
+              </div>
+              <div class="pfoot">
+                <span class="price">249 Kč</span>
+                <button class="btn btn--ghost add" type="button">Do košíku</button>
+              </div>
+            </article>
+
+            <article class="product" data-cat="spot" data-name="Toner kompatibilní (demo)" data-price="890">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody">
+                <div class="meta"><span class="tag">Spotřeba</span><span class="tag">Tisk</span></div>
+                <h3>Toner kompatibilní (demo)</h3>
+                <p>Vyber podle typu tiskárny.</p>
+              </div>
+              <div class="pfoot">
+                <span class="price">890 Kč</span>
+                <button class="btn btn--ghost add" type="button">Do košíku</button>
+              </div>
+            </article>
+
+            <article class="product" data-cat="tech" data-name="Skener dokumentů" data-price="6990">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody">
+                <div class="meta"><span class="tag">Technika</span><span class="tag">Workflow</span></div>
+                <h3>Skener dokumentů</h3>
+                <p>Rychlá digitalizace pro týmy.</p>
+              </div>
+              <div class="pfoot">
+                <span class="price">6 990 Kč</span>
+                <button class="btn btn--ghost add" type="button">Do košíku</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <div class="container" style="padding:0;">
+          <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+            <span>© <span id="year"></span> CT Praha</span>
+            <span><a href="index.html#kontakt" style="text-decoration:underline; text-underline-offset:3px;">Kontakt</a></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+
+    // Elements
+    const q = document.getElementById('q');
+    const sort = document.getElementById('sort');
+    const reset = document.getElementById('reset');
+    const catButtons = Array.from(document.querySelectorAll('.cat'));
+    const productsWrap = document.getElementById('products');
+    let products = Array.from(document.querySelectorAll('.product'));
+
+    // Cart (simple demo)
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const countShown = document.getElementById('countShown');
+
+    let cart = [];
+    let activeCat = 'all';
+    let query = '';
+
+    function fmtCZK(n){
+      return new Intl.NumberFormat('cs-CZ').format(n) + ' Kč';
+    }
+
+    function updateBadges(){
+      const totals = { all: products.length, tech:0, lam:0, folie:0, spot:0 };
+      products.forEach(p => totals[p.dataset.cat] = (totals[p.dataset.cat] || 0) + 1);
+
+      document.querySelectorAll('[data-b]').forEach(b => {
+        const k = b.getAttribute('data-b');
+        b.textContent = (totals[k] ?? 0);
+      });
+    }
+
+    function apply(){
+      const qq = query.trim().toLowerCase();
+
+      // Filter
+      let filtered = products.filter(p => {
+        const catOk = activeCat === 'all' || p.dataset.cat === activeCat;
+        const name = (p.dataset.name || '').toLowerCase();
+        const text = (p.innerText || '').toLowerCase();
+        const qOk = !qq || name.includes(qq) || text.includes(qq);
+        return catOk && qOk;
+      });
+
+      // Sort
+      const mode = sort.value;
+      if (mode === 'name'){
+        filtered.sort((a,b) => (a.dataset.name||'').localeCompare((b.dataset.name||''), 'cs'));
+      }
+      if (mode === 'priceAsc'){
+        filtered.sort((a,b) => Number(a.dataset.price||0) - Number(b.dataset.price||0));
+      }
+      if (mode === 'priceDesc'){
+        filtered.sort((a,b) => Number(b.dataset.price||0) - Number(a.dataset.price||0));
+      }
+
+      // Render by reordering DOM (simple)
+      filtered.forEach(p => productsWrap.appendChild(p));
+      products.forEach(p => p.style.display = filtered.includes(p) ? '' : 'none');
+
+      countShown.textContent = String(filtered.length);
+    }
+
+    function renderCart(){
+      cartItemsEl.innerHTML = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        total += item.price;
+        const row = document.createElement('div');
+        row.className = 'cartItem';
+        row.innerHTML = `
+          <div class="cartThumb" aria-hidden="true"></div>
+          <div style="flex:1;">
+            <strong>${item.name}</strong>
+            <span>${fmtCZK(item.price)}</span>
+          </div>
+          <button class="btn btn--ghost" type="button" data-remove="${item.id}" style="padding:8px 10px;">✕</button>
+        `;
+        cartItemsEl.appendChild(row);
+      });
+
+      cartCountEl.textContent = String(cart.length);
+      cartTotalEl.textContent = fmtCZK(total);
+
+      cartItemsEl.querySelectorAll('[data-remove]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-remove');
+          cart = cart.filter(x => x.id !== id);
+          renderCart();
+        });
+      });
+    }
+
+    // Events
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        activeCat = btn.dataset.cat || 'all';
+        apply();
+      });
+    });
+
+    q.addEventListener('input', (e) => {
+      query = e.target.value || '';
+      apply();
+    });
+
+    sort.addEventListener('change', apply);
+
+    reset.addEventListener('click', () => {
+      query = '';
+      q.value = '';
+      sort.value = 'reco';
+      activeCat = 'all';
+      catButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cat === 'all')));
+      apply();
+    });
+
+    document.querySelectorAll('.add').forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        const p = btn.closest('.product');
+        const name = p.dataset.name || 'Produkt';
+        const price = Number(p.dataset.price || 0);
+        cart.push({ id: name + '_' + idx + '_' + Date.now(), name, price });
+        renderCart();
+      });
+    });
+
+    updateBadges();
+    apply();
+    renderCart();
+  </script>
+</body>
+</html>

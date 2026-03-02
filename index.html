@@ -2,250 +2,1343 @@
 <html lang="cs">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CT Praha — Kancelářská technika & laminace</title>
-  <meta name="description" content="Kancelářská technika a technologie laminace. Poradenství, rychlá komunikace a spolehlivé dodání." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="CT Praha – kancelářská technika, laminace a poradenství. Rychlá komunikace, spolehlivé termíny, řešení pro firmy." />
+  <title>CT Praha | Kancelářská technika & laminace</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: "#B91C1C",
-            accent: "#E11D48",
-            soft: "#F7F7F8",
-            ink: "#0F172A"
-          },
-          fontFamily: {
-            sans: ["Inter","ui-sans-serif","system-ui","Segoe UI","Roboto","Helvetica","Arial","sans-serif"]
-          }
-        }
-      }
-    }
+  <!-- LocalBusiness + FAQ schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"CT Praha",
+    "description":"Kancelářská technika, laminace a poradenství pro firmy.",
+    "telephone":"+420000000000",
+    "email":"info@ctpraha.cz",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"Doplň ulici a číslo",
+      "addressLocality":"Praha",
+      "postalCode":"11000",
+      "addressCountry":"CZ"
+    },
+    "openingHours":["Mo-Fr 09:00-17:00"],
+    "url":"https://ctpraha.cz"
+  }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Jak rychle reagujete na poptávku?",
+        "acceptedAnswer":{"@type":"Answer","text":"Typicky odpovídáme během pracovního dne. U urgentních věcí se domluvíme individuálně."}
+      },
+      {
+        "@type":"Question",
+        "name":"Děláte i servis a dlouhodobou správu?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ano. Umíme jednorázové zásahy i pravidelný servis / smluvní péči pro firmy."}
+      },
+      {
+        "@type":"Question",
+        "name":"Je možné fakturovat na firmu a domluvit B2B ceny?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ano. Standardně fakturujeme na firmu. Pro pravidelné odběry lze nastavit B2B ceník nebo rámcovou dohodu."}
+      },
+      {
+        "@type":"Question",
+        "name":"Dodáváte i instalaci a zaškolení?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ano. Podle typu řešení zajistíme instalaci, nastavení a krátké zaškolení obsluhy."}
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e8eef6;
+      --soft:#f6f7fb;
+      --shadow:0 12px 30px rgba(15,23,42,.08);
+      --shadow2:0 6px 18px rgba(15,23,42,.08);
+      --radius:18px;
+      --radius-sm:14px;
+      --container:1120px;
+
+      --brand:#e11d2e;
+      --brand-dark:#b70f1c;
+      --brand-ink:#ffffff;
+
+      --ring: 0 0 0 4px rgba(225,29,46,.22);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
+    .container{ width:min(var(--container), calc(100% - 40px)); margin:0 auto; }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); border:0;
+    }
+
+    /* Topbar */
+    .topbar{
+      background:var(--brand);
+      color:#fff;
+      font-size:14px;
+    }
+    .topbar__inner{
+      display:flex; gap:16px; justify-content:space-between; align-items:center;
+      padding:10px 0;
+      flex-wrap:wrap;
+    }
+    .topbar__left{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .topbar__link{ opacity:.95; }
+    .topbar__link:hover{ opacity:1; text-decoration:underline; text-underline-offset:3px; }
+    .topbar__sep{ opacity:.8; }
+    .topbar__muted{ opacity:.9; }
+
+    /* Header */
+    .header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .header__inner{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:14px 0;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width: 220px; }
+    .brand__mark{
+      width:42px; height:42px; border-radius:14px;
+      background:var(--brand); color:#fff;
+      display:grid; place-items:center;
+      font-weight:900; letter-spacing:.6px;
+      box-shadow:var(--shadow2);
+      user-select:none;
+    }
+    .brand__text strong{ display:block; }
+    .brand__text small{ display:block; color:var(--muted); font-size:12px; margin-top:2px; }
+
+    .nav{
+      display:flex; gap:10px; align-items:center;
+      color:var(--muted);
+    }
+    .nav a{
+      padding:10px 12px;
+      border-radius:12px;
+    }
+    .nav a:hover{ background:var(--soft); color:var(--text); }
+
+    .header__cta{ display:flex; gap:10px; align-items:center; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-weight:700;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn:active{ transform:translateY(1px); }
+    .btn:focus{ outline:none; box-shadow: var(--ring); }
+    .btn--primary{
+      background:var(--brand);
+      color:var(--brand-ink);
+      box-shadow:var(--shadow2);
+    }
+    .btn--primary:hover{ background:var(--brand-dark); }
+    .btn--ghost{
+      background:transparent;
+      border-color:var(--border);
+      color:var(--text);
+    }
+    .btn--ghost:hover{ background:var(--soft); }
+    .btn--soft{
+      background:var(--soft);
+      border-color:var(--border);
+      color:var(--text);
+    }
+    .btn--soft:hover{ background:#eef2f8; }
+    .btn--lg{ padding:12px 18px; }
+
+    .burger{
+      display:none;
+      background:none;
+      border:1px solid var(--border);
+      padding:10px;
+      border-radius:12px;
+    }
+    .burger:focus{ outline:none; box-shadow:var(--ring); }
+    .burger span{ display:block; width:22px; height:2px; background:var(--text); margin:5px 0; }
+
+    /* Mobile menu */
+    .mnav{
+      display:none;
+      border-top:1px solid var(--border);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+    }
+    .mnav__inner{
+      padding: 10px 0 14px;
+      display:grid;
+      gap: 6px;
+    }
+    .mnav a{
+      padding: 12px 12px;
+      border-radius: 12px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .mnav a:hover{ background: var(--soft); }
+
+    /* Hero */
+    .hero{
+      padding: clamp(32px, 4vw, 64px) 0;
+      background:
+        radial-gradient(900px 500px at 80% 20%, rgba(225,29,46,.12), transparent 55%),
+        radial-gradient(800px 500px at 20% 20%, rgba(15,23,42,.06), transparent 50%);
+    }
+    .hero__grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: clamp(22px, 4vw, 48px);
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background: rgba(255,255,255,.7);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+    .dot{ width:8px; height:8px; border-radius:999px; background:var(--brand); display:inline-block; }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .accent{ color:var(--brand); }
+    .lead{
+      color:var(--muted);
+      font-size:16px;
+      max-width: 58ch;
+      margin: 0 0 18px;
+    }
+    .hero__buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+
+    .trust{
+      list-style:none; padding:0; margin:0;
+      display:grid; gap:12px;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+    }
+    .trust li{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      border-radius: var(--radius-sm);
+      padding:12px;
+    }
+    .trust strong{ display:block; font-size:13px; }
+    .trust span{ display:block; font-size:12px; color:var(--muted); margin-top:2px; }
+
+    .mediaCard{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+      background:#fff;
+      min-height: 360px;
+    }
+    .mediaCard img{ width:100%; height: 420px; object-fit: cover; }
+    .mediaCard__overlay{
+      position:absolute; left:0; right:0; bottom:0;
+      padding:18px;
+      background: linear-gradient(to top, rgba(15,23,42,.70), rgba(15,23,42,.15), transparent);
+      color:#fff;
+    }
+    .kicker{ margin:0; font-weight:900; font-size:18px; }
+    .sub{ margin:6px 0 12px; opacity:.92; font-size:13px; }
+    .mediaCard__actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
+    .pill{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.25);
+      color:#fff;
+      font-weight:800;
+      font-size:13px;
+    }
+    .pill:hover{ background: rgba(255,255,255,.20); }
+    .pill--primary{
+      background: rgba(225,29,46,.95);
+      border-color: rgba(225,29,46,1);
+    }
+    .pill--primary:hover{ background: rgba(183,15,28,.95); }
+    .caption{ color:var(--muted); font-size:12px; margin:10px 4px 0; }
+
+    /* Sections */
+    .section{ padding: clamp(28px, 4vw, 56px) 0; }
+    .section--alt{
+      background:
+        radial-gradient(900px 500px at 20% 20%, rgba(225,29,46,.06), transparent 55%),
+        linear-gradient(#fff, #fff);
+    }
+    .section__head{ margin-bottom: 18px; }
+    .section__head h2{ margin:0; font-size:26px; letter-spacing:-0.01em; }
+    .section__head p{ margin:6px 0 0; color:var(--muted); }
+    .section__head--split{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    }
+
+    /* Cards grid */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:18px;
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+    }
+    .card h3{ margin:0 0 8px; font-size:16px; }
+    .card p{ margin:0 0 12px; color:var(--muted); font-size:14px; }
+    .link{ color:var(--brand); font-weight:850; }
+    .link:hover{ text-decoration:underline; text-underline-offset:3px; }
+
+    /* How it works */
+    .miniTrust{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .miniTrust__item{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius: 999px;
+      padding:8px 12px;
+      box-shadow: 0 6px 16px rgba(15,23,42,.04);
+    }
+    .miniTrust__item strong{ font-size:12px; }
+    .miniTrust__item span{ font-size:12px; color:var(--muted); margin-left:6px; }
+
+    .steps{
+      list-style:none;
+      padding:0; margin:0;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+    }
+    .step{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding:18px;
+      display:flex; gap:12px;
+      align-items:flex-start;
+    }
+    .step__num{
+      width:36px; height:36px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(225,29,46,.10);
+      color: var(--brand);
+      font-weight:900;
+      flex: 0 0 auto;
+    }
+    .step h3{ margin:0 0 6px; font-size:16px; }
+    .step p{ margin:0; color:var(--muted); font-size:14px; }
+
+    /* Products / categories with filter */
+    .toolsBar{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      margin-bottom: 14px;
+    }
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .chip{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight:850;
+      color: var(--muted);
+      cursor:pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .chip:hover{ background: var(--soft); color: var(--text); }
+    .chip[aria-pressed="true"]{
+      border-color: rgba(225,29,46,.35);
+      background: rgba(225,29,46,.08);
+      color: var(--text);
+    }
+    .searchWrap{
+      display:flex; gap:10px; align-items:center;
+      flex: 1 1 320px;
+      max-width: 460px;
+    }
+    .searchWrap input{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .productGrid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:14px;
+    }
+    .product{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .product__img{
+      height: 150px;
+      background:
+        radial-gradient(400px 200px at 30% 40%, rgba(225,29,46,.14), transparent 60%),
+        radial-gradient(400px 200px at 70% 60%, rgba(15,23,42,.10), transparent 60%),
+        var(--soft);
+    }
+    .product__body{ padding: 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
+    .product__meta{ display:flex; gap:8px; flex-wrap:wrap; }
+    .tag{
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .product h3{ margin:0; font-size: 15px; }
+    .product p{ margin:0; color: var(--muted); font-size: 13px; }
+    .product__foot{
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .price{
+      font-weight: 950;
+      letter-spacing: -.01em;
+    }
+
+    /* Stats / proof */
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:14px;
+      margin-top: 14px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding: 16px;
+    }
+    .stat strong{
+      display:block;
+      font-size: 22px;
+      letter-spacing: -.02em;
+    }
+    .stat span{
+      display:block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    /* References */
+    .refs{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .quote{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height: 220px;
+    }
+    .quote__stars{ letter-spacing: 2px; color: var(--brand); font-weight: 900; }
+    .quote blockquote{ margin:0; font-size:16px; }
+    .quote__meta{ display:flex; align-items:center; gap:10px; margin-top:auto; }
+    .avatar{
+      width:40px; height:40px; border-radius: 999px;
+      background: linear-gradient(135deg, rgba(225,29,46,.20), rgba(15,23,42,.08));
+      border:1px solid var(--border);
+    }
+    .quote__meta strong{ display:block; font-size:13px; }
+    .quote__meta span{ display:block; font-size:12px; color:var(--muted); }
+
+    .logoWall{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding:18px;
+    }
+    .logoWall p{ margin:0 0 10px; color:var(--muted); font-size:13px; }
+    .logos{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:10px;
+    }
+    .logo{
+      border:1px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding:14px;
+      text-align:center;
+      font-weight:900;
+      color: rgba(15,23,42,.60);
+      background: var(--soft);
+      user-select:none;
+    }
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    details{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding: 14px 16px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:850;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width:28px; height:28px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: var(--soft);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+      transition: transform .15s ease;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+    details p{ margin: 10px 0 0; color:var(--muted); font-size:14px; }
+
+    /* Contact */
+    .contactGrid{
+      display:grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap:14px;
+      align-items:start;
+    }
+    .contactCard{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding:18px;
+    }
+    .contactCard h3{ margin:0 0 10px; }
+    .contactList{ margin:0; padding:0; list-style:none; display:grid; gap:10px; }
+    .contactList li{
+      border:1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding:12px;
+      background: rgba(255,255,255,.7);
+    }
+    .contactList small{ display:block; color:var(--muted); }
+    .map{
+      height: 220px;
+      border-radius: var(--radius);
+      border:1px solid var(--border);
+      background:
+        radial-gradient(400px 200px at 30% 40%, rgba(225,29,46,.14), transparent 60%),
+        radial-gradient(400px 200px at 70% 60%, rgba(15,23,42,.10), transparent 60%),
+        var(--soft);
+      display:grid; place-items:center;
+      color: rgba(15,23,42,.55);
+      font-weight: 900;
+      user-select:none;
+      margin-top: 12px;
+    }
+
+    form{ display:grid; gap:12px; }
+    .fieldRow{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    label{ font-weight: 800; font-size: 13px; }
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background:#fff;
+      color: var(--text);
+      font: inherit;
+      outline:none;
+      transition: box-shadow .15s ease, border-color .15s ease;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus, select:focus{
+      box-shadow: var(--ring);
+      border-color: rgba(225,29,46,.35);
+    }
+    .formNote{ margin:0; font-size:12px; color:var(--muted); }
+    .formActions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+    /* Footer */
+    .footer{
+      background: var(--brand);
+      color: #fff;
+      margin-top: 30px;
+    }
+    .footer__inner{
+      padding: 26px 0;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .footer a{ color:#fff; text-decoration: underline; text-underline-offset: 3px; }
+    .footer p, .footer li{ opacity:.92; }
+    .footer h4{ margin:0 0 10px; }
+    .footer ul{ margin:0; padding-left: 18px; }
+    .footer__bottom{
+      border-top: 1px solid rgba(255,255,255,.22);
+      padding: 12px 0;
+      font-size: 12px;
+      opacity:.92;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+
+    /* Floating CTA (mobile) */
+    .floatCta{
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 80;
+      display:none;
+    }
+    .floatCta__inner{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .floatBtn{
+      flex: 1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor:pointer;
+    }
+    .floatBtn:focus{ outline:none; box-shadow: var(--ring); }
+    .floatBtn--primary{
+      background: var(--brand);
+      color: #fff;
+      border-color: rgba(225,29,46,.35);
+    }
+    .floatBtn--primary:hover{ background: var(--brand-dark); }
+
+    /* Responsive */
+    @media (max-width: 1100px){
+      .productGrid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 980px){
+      .nav{ display:none; }
+      .burger{ display:inline-block; }
+      .hero__grid{ grid-template-columns: 1fr; }
+      .mediaCard img{ height: 360px; }
+      .trust{ grid-template-columns: 1fr; }
+      .steps{ grid-template-columns: 1fr; }
+      .refs{ grid-template-columns: 1fr; }
+      .faq{ grid-template-columns: 1fr; }
+      .contactGrid{ grid-template-columns: 1fr; }
+      .footer__inner{ grid-template-columns: 1fr; }
+      .fieldRow{ grid-template-columns: 1fr; }
+      .productGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .floatCta{ display:block; }
+      body{ padding-bottom: 88px; } /* space for floating CTA */
+    }
+    @media (max-width: 520px){
+      .productGrid{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
-<body class="bg-white text-slate-900 font-sans">
+<body>
   <!-- Top bar -->
-  <div class="bg-ink text-white">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between">
-        <div class="flex items-center gap-4 text-sm text-white/90">
-          <a class="hover:text-white" href="tel:+420000000000">☎ +420 000 000 000</a>
-          <a class="hover:text-white" href="mailto:info@ctpraha.cz">✉ info@ctpraha.cz</a>
-        </div>
-        <div class="text-sm text-white/80">Kancelářská technika • Laminace • Poradenství</div>
+  <header class="topbar" aria-label="Kontakt">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <a class="topbar__link" href="tel:+420000000000">📞 +420 000 000 000</a>
+        <span class="topbar__sep" aria-hidden="true">•</span>
+        <a class="topbar__link" href="mailto:info@ctpraha.cz">✉️ info@ctpraha.cz</a>
       </div>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <a href="index.html" class="flex items-center gap-3">
-          <div class="h-10 w-10 rounded-2xl bg-brand text-white grid place-items-center font-extrabold">CT</div>
-          <div class="leading-tight">
-            <div class="font-extrabold text-slate-900">CT Praha</div>
-            <div class="text-xs text-slate-500">Kancelářská technika & laminace</div>
-          </div>
-        </a>
-
-        <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-700">
-          <a href="sluzby.html" class="hover:text-brand">Služby</a>
-          <a href="onas.html" class="hover:text-brand">O nás</a>
-          <a href="reference.html" class="hover:text-brand">Reference</a>
-          <a href="kontakt.html" class="hover:text-brand">Kontakt</a>
-        </nav>
-
-        <div class="flex items-center gap-3">
-          <a href="kontakt.html" class="hidden sm:inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold border border-slate-300 hover:border-slate-400">
-            Nezávazná poptávka
-          </a>
-          <a href="https://ctpraha.cz/" class="inline-flex items-center justify-center rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-95">
-            Přejít na e-shop
-          </a>
-
-          <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-xl border border-slate-300 p-2 hover:border-slate-400" aria-label="Otevřít menu">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div id="mobileMenu" class="md:hidden hidden pb-4">
-        <div class="flex flex-col gap-2 text-sm font-semibold text-slate-700">
-          <a href="sluzby.html" class="rounded-xl px-3 py-2 hover:bg-soft">Služby</a>
-          <a href="onas.html" class="rounded-xl px-3 py-2 hover:bg-soft">O nás</a>
-          <a href="reference.html" class="rounded-xl px-3 py-2 hover:bg-soft">Reference</a>
-          <a href="kontakt.html" class="rounded-xl px-3 py-2 hover:bg-soft">Kontakt</a>
-        </div>
+      <div class="topbar__right">
+        <span class="topbar__muted">Kancelářská technika • Laminace • Poradenství</span>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <main>
-    <section class="relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-b from-soft to-white"></div>
+  <!-- Main header -->
+  <header class="header" aria-label="Hlavní navigace">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="CT Praha – domů">
+        <span class="brand__mark" aria-hidden="true">CT</span>
+        <span class="brand__text">
+          <strong>CT Praha</strong>
+          <small>Kancelářská technika & laminace</small>
+        </span>
+      </a>
 
-      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-        <div class="grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <div class="inline-flex items-center gap-2 rounded-full bg-white border border-slate-200 px-4 py-2 text-sm text-slate-600">
-              <span class="h-2 w-2 rounded-full bg-accent"></span>
-              Moderní řešení pro firmy i provozy
-            </div>
+      <nav class="nav" aria-label="Menu">
+        <a href="#sluzby">Služby</a>
+        <a href="#kategorie">Kategorie</a>
+        <a href="#jak">Jak to funguje</a>
+        <a href="#reference">Reference</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
 
-            <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight text-ink">
-              Kancelářská technika a laminace<br class="hidden sm:block" />
-              <span class="text-brand">rychle, přehledně, profesionálně</span>
-            </h1>
+      <div class="header__cta">
+        <a class="btn btn--ghost" href="#kontakt">Kontakt</a>
+        <a class="btn btn--primary" href="eshop.html">Přejít na e-shop</a>
+      </div>
 
-            <p class="mt-5 text-lg text-slate-600 leading-relaxed">
-              Pomůžeme s výběrem a dodáme řešení, které sedí na reálné použití. Jasná komunikace, spolehlivé termíny.
-            </p>
+      <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mnav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
 
-            <div class="mt-8 flex flex-col sm:flex-row gap-3">
-              <a href="kontakt.html" class="inline-flex items-center justify-center rounded-2xl bg-accent px-6 py-3 text-white font-semibold hover:opacity-95">
-                Kontaktujte nás
-              </a>
-              <a href="sluzby.html" class="inline-flex items-center justify-center rounded-2xl border border-slate-300 px-6 py-3 font-semibold hover:border-slate-400">
-                Zobrazit služby
-              </a>
-            </div>
+    <div class="mnav" id="mnav" aria-label="Mobilní menu">
+      <div class="container mnav__inner">
+        <a href="#sluzby">Služby</a>
+        <a href="#kategorie">Kategorie</a>
+        <a href="#jak">Jak to funguje</a>
+        <a href="#reference">Reference</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="eshop.html">Přejít na e-shop</a>
+      </div>
+    </div>
+  </header>
 
-            <div class="mt-10 grid sm:grid-cols-3 gap-4">
-              <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                <div class="text-sm font-bold text-ink">Poradenství</div>
-                <div class="text-sm text-slate-600 mt-1">Doporučení na míru.</div>
-              </div>
-              <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                <div class="text-sm font-bold text-ink">Rychlá reakce</div>
-                <div class="text-sm text-slate-600 mt-1">Bez průtahů.</div>
-              </div>
-              <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                <div class="text-sm font-bold text-ink">Spolehlivé dodání</div>
-                <div class="text-sm text-slate-600 mt-1">Domluva platí.</div>
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" aria-label="Úvod">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <div class="badge">
+            <span class="dot" aria-hidden="true"></span>
+            Moderní řešení pro firmy i provozy
+          </div>
+
+          <h1>
+            Kancelářská technika a laminace<br />
+            <span class="accent">rychle, přehledně, profesionálně</span>
+          </h1>
+
+          <p class="lead">
+            Pomůžeme s výběrem, dodáme řešení a postaráme se o servis.
+            Jasná komunikace, spolehlivé termíny, férové ceny pro B2B.
+          </p>
+
+          <div class="hero__buttons">
+            <a class="btn btn--primary btn--lg" href="#kontakt">Kontaktujte nás</a>
+            <a class="btn btn--soft btn--lg" href="#kategorie">Prohlédnout kategorie</a>
+          </div>
+
+          <ul class="trust" aria-label="Výhody">
+            <li><strong>Rychlá reakce</strong><span>Odpověď typicky do 2 hodin</span></li>
+            <li><strong>Poradenství</strong><span>Doporučíme řešení na míru</span></li>
+            <li><strong>Dodání</strong><span>Termíny platí, bez výmluv</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__media" aria-label="Ukázka práce">
+          <div class="mediaCard">
+            <img
+              src="https://images.unsplash.com/photo-1587614313085-5da51cebd8ac?auto=format&fit=crop&w=1600&q=80"
+              alt="Ukázka kancelářské techniky a laminace v praxi"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div class="mediaCard__overlay">
+              <p class="kicker">Řešení, co funguje v praxi</p>
+              <p class="sub">Poradenství • Rychlá komunikace • Spolehlivé dodání</p>
+              <div class="mediaCard__actions">
+                <a class="pill pill--primary" href="#kontakt">Kontakt</a>
+                <a class="pill" href="eshop.html">E-shop</a>
               </div>
             </div>
           </div>
-
-          <!-- HERO FOTO SLOT -->
-          <div class="relative">
-            <div class="absolute -top-12 -right-12 h-60 w-60 rounded-full bg-accent/15 blur-2xl"></div>
-            <div class="absolute -bottom-12 -left-12 h-60 w-60 rounded-full bg-brand/10 blur-2xl"></div>
-
-            <div class="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-              <div class="relative">
-                <img
-                  src="assets/img/hero.jpg"
-                  alt="Kancelářská technika a laminace — CT Praha"
-                  class="h-[340px] w-full object-cover"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"></div>
-
-                <div class="absolute bottom-0 left-0 right-0 p-6">
-                  <div class="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur px-4 py-2 text-sm text-white">
-                    <span class="h-2 w-2 rounded-full bg-accent"></span>
-                    Kancelářská technika • Laminace • Fólie
-                  </div>
-                  <div class="mt-3 text-2xl font-extrabold text-white">Řešení, co funguje v praxi</div>
-                  <div class="mt-1 text-white/80">Poradenství • Rychlá komunikace • Spolehlivé dodání</div>
-
-                  <div class="mt-5 flex gap-3">
-                    <a href="sluzby.html" class="rounded-2xl bg-accent px-6 py-3 text-white font-semibold hover:opacity-95">Služby</a>
-                    <a href="kontakt.html" class="rounded-2xl bg-white/15 px-6 py-3 text-white font-semibold hover:bg-white/20">Poptávka</a>
-                  </div>
-                </div>
-              </div>
-              <div class="h-2 bg-gradient-to-r from-brand via-accent to-brand"></div>
-            </div>
-
-            <p class="mt-4 text-xs text-slate-500">
-              Fotku dej ideálně reálnou (stroj, laminace, detail fólií, provoz).
-            </p>
-          </div>
+          <p class="caption">Tip: reálné fotky zvednou důvěru nejvíc (stroj, laminace, detail fólie, provoz).</p>
         </div>
       </div>
     </section>
 
-    <!-- Quick links -->
-    <section class="py-14">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-5">
-          <a href="sluzby.html" class="rounded-3xl border border-slate-200 p-7 hover:shadow-sm transition">
-            <div class="text-sm font-semibold text-slate-500">Co děláme</div>
-            <div class="mt-1 text-xl font-extrabold text-ink">Služby & sortiment</div>
-            <p class="mt-2 text-slate-600">Přehledně v kartách — rychlá orientace.</p>
-            <div class="mt-4 text-accent font-semibold">Přejít →</div>
-          </a>
+    <!-- SERVICES -->
+    <section class="section" id="sluzby">
+      <div class="container">
+        <div class="section__head">
+          <h2>Služby</h2>
+          <p>Přehledně, stručně, s jasným dalším krokem.</p>
+        </div>
 
-          <a href="reference.html" class="rounded-3xl border border-slate-200 p-7 hover:shadow-sm transition">
-            <div class="text-sm font-semibold text-slate-500">Důvěra</div>
-            <div class="mt-1 text-xl font-extrabold text-ink">Reference</div>
-            <p class="mt-2 text-slate-600">Recenze, hodnocení, loga klientů.</p>
-            <div class="mt-4 text-accent font-semibold">Přejít →</div>
-          </a>
+        <div class="cards">
+          <article class="card">
+            <h3>Kancelářská technika</h3>
+            <p>Tisk, sken, spotřební materiál, instalace a servis pro firmy.</p>
+            <a class="link" href="#kontakt">Domluvit řešení →</a>
+          </article>
 
-          <a href="kontakt.html" class="rounded-3xl border border-slate-200 p-7 hover:shadow-sm transition">
-            <div class="text-sm font-semibold text-slate-500">Rychlá poptávka</div>
-            <div class="mt-1 text-xl font-extrabold text-ink">Kontakt</div>
-            <p class="mt-2 text-slate-600">Formulář + údaje + mapa.</p>
-            <div class="mt-4 text-accent font-semibold">Přejít →</div>
-          </a>
+          <article class="card">
+            <h3>Laminace & fólie</h3>
+            <p>Laminace dokumentů, ochranné fólie, aplikace a poradenství.</p>
+            <a class="link" href="#kontakt">Zadat popis potřeby →</a>
+          </article>
+
+          <article class="card">
+            <h3>Poradenství pro firmy</h3>
+            <p>Návrh řešení na míru a optimalizace nákladů i procesů.</p>
+            <a class="link" href="#jak">Jak to probíhá →</a>
+          </article>
+        </div>
+
+        <!-- Proof stats -->
+        <div class="stats" aria-label="Důkazy důvěry">
+          <div class="stat"><strong>10+ let</strong><span>zkušeností v oboru</span></div>
+          <div class="stat"><strong>100+ firem</strong><span>v pravidelné péči</span></div>
+          <div class="stat"><strong>2h</strong><span>typická odezva</span></div>
+          <div class="stat"><strong>Praha & okolí</strong><span>dodání + servis</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES / PRODUCTS WITH FILTER -->
+    <section class="section section--alt" id="kategorie">
+      <div class="container">
+        <div class="section__head section__head--split">
+          <div>
+            <h2>Kategorie a rychlý výběr</h2>
+            <p>Filtrujte podle oblasti. (Data si pak napojíš na reálný sortiment.)</p>
+          </div>
+
+          <div class="searchWrap" aria-label="Vyhledávání">
+            <input id="search" type="search" placeholder="Hledat (např. laminace, tisk, fólie…)" />
+          </div>
+        </div>
+
+        <div class="toolsBar">
+          <div class="filters" aria-label="Filtry">
+            <button class="chip" type="button" aria-pressed="true" data-filter="all">Vše</button>
+            <button class="chip" type="button" aria-pressed="false" data-filter="tech">Technika</button>
+            <button class="chip" type="button" aria-pressed="false" data-filter="lam">Laminace</button>
+            <button class="chip" type="button" aria-pressed="false" data-filter="folie">Fólie</button>
+            <button class="chip" type="button" aria-pressed="false" data-filter="servis">Servis</button>
+          </div>
+
+          <a class="btn btn--primary" href="eshop.html">Otevřít e-shop</a>
+        </div>
+
+        <div class="productGrid" id="productGrid">
+          <!-- Product cards (static demo) -->
+          <article class="product" data-cat="tech" data-name="Multifunkční tiskárna A4">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Technika</span><span class="tag">B2B</span></div>
+              <h3>Multifunkční tiskárna A4</h3>
+              <p>Spolehlivá pro kanceláře. Doporučíme konfiguraci + servis.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">na dotaz</span>
+              <a class="btn btn--ghost" href="#kontakt">Zajímá mě</a>
+            </div>
+          </article>
+
+          <article class="product" data-cat="lam" data-name="Laminace dokumentů A3">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Laminace</span><span class="tag">Rychle</span></div>
+              <h3>Laminace dokumentů A3</h3>
+              <p>Ochrana dokumentů, štítků a materiálů pro provozy.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">od … Kč</span>
+              <a class="btn btn--ghost" href="#kontakt">Domluvit</a>
+            </div>
+          </article>
+
+          <article class="product" data-cat="folie" data-name="Ochranné fólie na povrchy">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Fólie</span><span class="tag">Aplikace</span></div>
+              <h3>Ochranné fólie na povrchy</h3>
+              <p>Proti oděru, špíně a mechanickému poškození.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">na dotaz</span>
+              <a class="btn btn--ghost" href="#kontakt">Zjistit možnosti</a>
+            </div>
+          </article>
+
+          <article class="product" data-cat="servis" data-name="Servis kancelářské techniky">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Servis</span><span class="tag">Smluvně</span></div>
+              <h3>Servis kancelářské techniky</h3>
+              <p>Jednorázově i dlouhodobě. SLA podle potřeb firmy.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">na dotaz</span>
+              <a class="btn btn--ghost" href="#kontakt">Chci servis</a>
+            </div>
+          </article>
+
+          <article class="product" data-cat="tech" data-name="Skener dokumentů">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Technika</span><span class="tag">Workflow</span></div>
+              <h3>Skener dokumentů</h3>
+              <p>Digitalizace a nastavení procesu skenování pro týmy.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">na dotaz</span>
+              <a class="btn btn--ghost" href="#kontakt">Probrat</a>
+            </div>
+          </article>
+
+          <article class="product" data-cat="folie" data-name="Laminační fólie a role">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Fólie</span><span class="tag">Spotřeba</span></div>
+              <h3>Laminační fólie a role</h3>
+              <p>Výběr správné tloušťky a typu podle použití.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">od … Kč</span>
+              <a class="btn btn--ghost" href="eshop.html">Do e-shopu</a>
+            </div>
+          </article>
+
+          <article class="product" data-cat="lam" data-name="Laminace velkoformát">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Laminace</span><span class="tag">Provoz</span></div>
+              <h3>Laminace velkoformát</h3>
+              <p>Pro cedule, vývěsky, návody, provozní označení.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">na dotaz</span>
+              <a class="btn btn--ghost" href="#kontakt">Poptat</a>
+            </div>
+          </article>
+
+          <article class="product" data-cat="servis" data-name="Preventivní prohlídky">
+            <div class="product__img" aria-hidden="true"></div>
+            <div class="product__body">
+              <div class="product__meta"><span class="tag">Servis</span><span class="tag">Prevence</span></div>
+              <h3>Preventivní prohlídky</h3>
+              <p>Méně výpadků a lepší životnost zařízení v provozu.</p>
+            </div>
+            <div class="product__foot">
+              <span class="price">na dotaz</span>
+              <a class="btn btn--ghost" href="#kontakt">Domluvit</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="jak">
+      <div class="container">
+        <div class="section__head section__head--split">
+          <div>
+            <h2>Jak to funguje</h2>
+            <p>Rychle, bez chaosu. Tři kroky a máte hotovo.</p>
+          </div>
+          <div class="miniTrust" aria-label="SLA">
+            <div class="miniTrust__item"><strong>Odpověď</strong><span>typicky do 2 hodin</span></div>
+            <div class="miniTrust__item"><strong>Termíny</strong><span>domluva platí</span></div>
+            <div class="miniTrust__item"><strong>Servis</strong><span>dlouhodobá péče</span></div>
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <div class="step__num" aria-hidden="true">1</div>
+            <div class="step__body">
+              <h3>Popis potřeby</h3>
+              <p>Napište nám, co řešíte. Pokud nemáte parametry, stačí stručně “co a kde”.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step__num" aria-hidden="true">2</div>
+            <div class="step__body">
+              <h3>Návrh řešení</h3>
+              <p>Navrhneme varianty, cenu a termín. Jasně a bez vaty.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step__num" aria-hidden="true">3</div>
+            <div class="step__body">
+              <h3>Dodání + servis</h3>
+              <p>Dodáme, nainstalujeme a postaráme se, aby to dlouhodobě fungovalo.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- REFERENCES -->
+    <section class="section section--alt" id="reference">
+      <div class="container">
+        <div class="section__head">
+          <h2>Reference</h2>
+          <p>Krátká citace + loga klientů (nahraď reálnými).</p>
+        </div>
+
+        <div class="refs">
+          <article class="quote" aria-label="Hodnocení klienta">
+            <div class="quote__stars" aria-hidden="true">★★★★★</div>
+            <blockquote>
+              “Domluva byla rychlá, dodání v termínu a servis bez zbytečných průtahů.
+              Přesně tohle u B2B dodavatele potřebujeme.”
+            </blockquote>
+            <div class="quote__meta">
+              <div class="avatar" aria-hidden="true"></div>
+              <div>
+                <strong>Office manager, Praha</strong>
+                <span>kancelářský provoz</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="logoWall" aria-label="Loga klientů">
+            <p><strong>Vybrané firmy</strong> (placeholder)</p>
+            <div class="logos">
+              <div class="logo">LOGO 1</div>
+              <div class="logo">LOGO 2</div>
+              <div class="logo">LOGO 3</div>
+              <div class="logo">LOGO 4</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__head">
+          <h2>FAQ</h2>
+          <p>Nejčastější otázky, které rozhodují o kontaktu.</p>
+        </div>
+
+        <div class="faq" role="list">
+          <details role="listitem">
+            <summary>Jak rychle reagujete? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>Typicky odpovídáme během pracovního dne. U urgentních věcí se domluvíme individuálně.</p>
+          </details>
+
+          <details role="listitem">
+            <summary>Děláte i servis? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>Ano. Jednorázové zásahy i smluvní péče pro firmy – podle potřeb a SLA.</p>
+          </details>
+
+          <details role="listitem">
+            <summary>Dodáváte instalaci a zaškolení? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>Ano. Podle typu řešení zajistíme instalaci, nastavení a krátké zaškolení obsluhy.</p>
+          </details>
+
+          <details role="listitem">
+            <summary>Fakturace na firmu a B2B ceny? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>Standardně fakturujeme na firmu. Pro pravidelný odběr lze nastavit B2B ceník.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section--alt" id="kontakt">
+      <div class="container">
+        <div class="section__head">
+          <h2>Kontakt</h2>
+          <p>Napište nám. Pokud nemáte parametry, stačí popsat situaci.</p>
+        </div>
+
+        <div class="contactGrid">
+          <aside class="contactCard" aria-label="Kontaktní údaje">
+            <h3>CT Praha</h3>
+            <ul class="contactList">
+              <li>
+                <small>Telefon</small>
+                <a href="tel:+420000000000"><strong>+420 000 000 000</strong></a>
+              </li>
+              <li>
+                <small>E-mail</small>
+                <a href="mailto:info@ctpraha.cz"><strong>info@ctpraha.cz</strong></a>
+              </li>
+              <li>
+                <small>Adresa</small>
+                <strong>Praha (doplň ulici, IČO)</strong>
+              </li>
+              <li>
+                <small>Otevírací doba</small>
+                <strong>Po–Pá 9:00–17:00</strong>
+              </li>
+            </ul>
+
+            <div class="map" aria-label="Mapa">MAPA / embed sem Google mapu</div>
+          </aside>
+
+          <section class="contactCard" aria-label="Kontaktní formulář">
+            <h3>Napište nám</h3>
+
+            <form action="#" method="post">
+              <div class="fieldRow">
+                <div>
+                  <label for="name">Jméno</label>
+                  <input id="name" name="name" autocomplete="name" placeholder="Jan Novák" required />
+                </div>
+                <div>
+                  <label for="company">Firma</label>
+                  <input id="company" name="company" autocomplete="organization" placeholder="Název firmy" />
+                </div>
+              </div>
+
+              <div class="fieldRow">
+                <div>
+                  <label for="email">E-mail</label>
+                  <input id="email" name="email" type="email" autocomplete="email" placeholder="jan@firma.cz" required />
+                </div>
+                <div>
+                  <label for="phone">Telefon</label>
+                  <input id="phone" name="phone" autocomplete="tel" placeholder="+420 ..." />
+                </div>
+              </div>
+
+              <div class="fieldRow">
+                <div>
+                  <label for="topic">Oblast</label>
+                  <select id="topic" name="topic">
+                    <option>Kancelářská technika</option>
+                    <option>Laminace</option>
+                    <option>Fólie</option>
+                    <option>Servis</option>
+                    <option>Jiné</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="when">Termín (volitelné)</label>
+                  <select id="when" name="when">
+                    <option>—</option>
+                    <option>Co nejdřív</option>
+                    <option>Do týdne</option>
+                    <option>Do měsíce</option>
+                    <option>Domluvou</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="msg">Zpráva</label>
+                <textarea id="msg" name="msg" placeholder="Co potřebujete? Kde je to nasazené? Jaké máte požadavky?" required></textarea>
+              </div>
+
+              <p class="formNote">
+                Odesláním souhlasíte se zpracováním údajů pro účely vyřízení zprávy.
+              </p>
+
+              <div class="formActions">
+                <button class="btn btn--primary btn--lg" type="submit">Odeslat</button>
+                <a class="btn btn--ghost btn--lg" href="mailto:info@ctpraha.cz?subject=Kontakt%20CT%20Praha">Radši e-mail</a>
+                <a class="btn btn--soft btn--lg" href="tel:+420000000000">Zavolat</a>
+              </div>
+            </form>
+          </section>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Floating CTA (mobile) -->
+  <div class="floatCta" aria-label="Rychlé akce">
+    <div class="floatCta__inner">
+      <a class="floatBtn" href="tel:+420000000000">📞 Zavolat</a>
+      <a class="floatBtn floatBtn--primary" href="#kontakt">✉️ Kontakt</a>
+      <a class="floatBtn" href="eshop.html">🛒 E-shop</a>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer class="bg-ink text-white">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid md:grid-cols-3 gap-10">
-        <div>
-          <div class="font-extrabold text-lg">CT Praha</div>
-          <p class="mt-3 text-white/75">Kancelářská technika & technologie laminace.</p>
-        </div>
-
-        <div>
-          <div class="font-bold">Navigace</div>
-          <ul class="mt-3 space-y-2 text-white/80">
-            <li><a class="hover:text-white" href="sluzby.html">Služby</a></li>
-            <li><a class="hover:text-white" href="onas.html">O nás</a></li>
-            <li><a class="hover:text-white" href="reference.html">Reference</a></li>
-            <li><a class="hover:text-white" href="kontakt.html">Kontakt</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="font-bold">Kontakt</div>
-          <ul class="mt-3 space-y-2 text-white/80">
-            <li><a class="hover:text-white" href="tel:+420000000000">+420 000 000 000</a></li>
-            <li><a class="hover:text-white" href="mailto:info@ctpraha.cz">info@ctpraha.cz</a></li>
-          </ul>
-        </div>
+  <footer class="footer" aria-label="Patička">
+    <div class="container footer__inner">
+      <div>
+        <h4>CT Praha</h4>
+        <p>
+          Kancelářská technika & technologie laminace.<br />
+          Rychlá komunikace, spolehlivé termíny, řešení pro firmy.
+        </p>
       </div>
 
-      <div class="mt-10 border-t border-white/10 pt-6 text-sm text-white/60">
-        © <span id="year"></span> CT Praha.
+      <div>
+        <h4>Navigace</h4>
+        <ul>
+          <li><a href="#sluzby">Služby</a></li>
+          <li><a href="#kategorie">Kategorie</a></li>
+          <li><a href="#jak">Jak to funguje</a></li>
+          <li><a href="#reference">Reference</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
       </div>
+
+      <div>
+        <h4>Kontakt</h4>
+        <p>
+          <a href="tel:+420000000000">+420 000 000 000</a><br />
+          <a href="mailto:info@ctpraha.cz">info@ctpraha.cz</a><br />
+          Praha (doplň adresu), IČO: XXXXXXXX
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <span>© <span id="year"></span> CT Praha. Všechna práva vyhrazena.</span>
+      <span><a href="/gdpr">Zásady ochrany osobních údajů</a></span>
     </div>
   </footer>
 
   <script>
-    const btn = document.getElementById("menuBtn");
-    const menu = document.getElementById("mobileMenu");
-    if (btn && menu) btn.addEventListener("click", () => menu.classList.toggle("hidden"));
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Mobile menu toggle
+    const burger = document.getElementById('burger');
+    const mnav = document.getElementById('mnav');
+
+    burger?.addEventListener('click', () => {
+      const isOpen = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!isOpen));
+      mnav.style.display = isOpen ? 'none' : 'block';
+    });
+
+    // Close mobile menu after click
+    mnav?.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.tagName === 'A') {
+        burger.setAttribute('aria-expanded', 'false');
+        mnav.style.display = 'none';
+      }
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+
+    // Products filter + search
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const search = document.getElementById('search');
+    const items = Array.from(document.querySelectorAll('.product'));
+
+    let activeFilter = 'all';
+    let query = '';
+
+    function applyFilter(){
+      const q = query.trim().toLowerCase();
+      let shown = 0;
+
+      items.forEach(el => {
+        const cat = el.dataset.cat || '';
+        const name = (el.dataset.name || '').toLowerCase();
+        const text = (el.innerText || '').toLowerCase();
+        const matchesCat = activeFilter === 'all' || cat === activeFilter;
+        const matchesQuery = !q || name.includes(q) || text.includes(q);
+
+        const ok = matchesCat && matchesQuery;
+        el.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+
+      // (Volitelně) můžeš sem přidat "0 výsledků" badge.
+    }
+
+    chips.forEach(btn => {
+      btn.addEventListener('click', () => {
+        chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        activeFilter = btn.dataset.filter || 'all';
+        applyFilter();
+      });
+    });
+
+    search?.addEventListener('input', (e) => {
+      query = e.target.value || '';
+      applyFilter();
+    });
+
+    applyFilter();
   </script>
 </body>
 </html>
-
-
-negr
