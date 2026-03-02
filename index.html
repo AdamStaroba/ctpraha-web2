@@ -34,7 +34,7 @@
     "mainEntity":[
       {
         "@type":"Question",
-        "name":"Jak rychle reagujete na poptávku?",
+        "name":"Jak rychle reagujete?",
         "acceptedAnswer":{"@type":"Answer","text":"Typicky odpovídáme během pracovního dne. U urgentních věcí se domluvíme individuálně."}
       },
       {
@@ -44,12 +44,12 @@
       },
       {
         "@type":"Question",
-        "name":"Je možné fakturovat na firmu a domluvit B2B ceny?",
-        "acceptedAnswer":{"@type":"Answer","text":"Ano. Standardně fakturujeme na firmu. Pro pravidelné odběry lze nastavit B2B ceník nebo rámcovou dohodu."}
+        "name":"Fakturace na firmu a B2B ceny?",
+        "acceptedAnswer":{"@type":"Answer","text":"Standardně fakturujeme na firmu. Pro pravidelný odběr lze nastavit B2B ceník."}
       },
       {
         "@type":"Question",
-        "name":"Dodáváte i instalaci a zaškolení?",
+        "name":"Dodáváte instalaci a zaškolení?",
         "acceptedAnswer":{"@type":"Answer","text":"Ano. Podle typu řešení zajistíme instalaci, nastavení a krátké zaškolení obsluhy."}
       }
     ]
@@ -88,21 +88,12 @@
     a{ color:inherit; text-decoration:none; }
     img{ max-width:100%; display:block; }
     .container{ width:min(var(--container), calc(100% - 40px)); margin:0 auto; }
-    .sr-only{
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); border:0;
-    }
 
     /* Topbar */
-    .topbar{
-      background:var(--brand);
-      color:#fff;
-      font-size:14px;
-    }
+    .topbar{ background:var(--brand); color:#fff; font-size:14px; }
     .topbar__inner{
       display:flex; gap:16px; justify-content:space-between; align-items:center;
-      padding:10px 0;
-      flex-wrap:wrap;
+      padding:10px 0; flex-wrap:wrap;
     }
     .topbar__left{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .topbar__link{ opacity:.95; }
@@ -133,14 +124,8 @@
     .brand__text strong{ display:block; }
     .brand__text small{ display:block; color:var(--muted); font-size:12px; margin-top:2px; }
 
-    .nav{
-      display:flex; gap:10px; align-items:center;
-      color:var(--muted);
-    }
-    .nav a{
-      padding:10px 12px;
-      border-radius:12px;
-    }
+    .nav{ display:flex; gap:10px; align-items:center; color:var(--muted); }
+    .nav a{ padding:10px 12px; border-radius:12px; }
     .nav a:hover{ background:var(--soft); color:var(--text); }
 
     .header__cta{ display:flex; gap:10px; align-items:center; }
@@ -150,30 +135,18 @@
       padding:10px 14px;
       border-radius:999px;
       border:1px solid transparent;
-      font-weight:700;
+      font-weight:800;
       transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
       white-space:nowrap;
       cursor:pointer;
     }
     .btn:active{ transform:translateY(1px); }
     .btn:focus{ outline:none; box-shadow: var(--ring); }
-    .btn--primary{
-      background:var(--brand);
-      color:var(--brand-ink);
-      box-shadow:var(--shadow2);
-    }
+    .btn--primary{ background:var(--brand); color:var(--brand-ink); box-shadow:var(--shadow2); }
     .btn--primary:hover{ background:var(--brand-dark); }
-    .btn--ghost{
-      background:transparent;
-      border-color:var(--border);
-      color:var(--text);
-    }
+    .btn--ghost{ background:transparent; border-color:var(--border); color:var(--text); }
     .btn--ghost:hover{ background:var(--soft); }
-    .btn--soft{
-      background:var(--soft);
-      border-color:var(--border);
-      color:var(--text);
-    }
+    .btn--soft{ background:var(--soft); border-color:var(--border); }
     .btn--soft:hover{ background:#eef2f8; }
     .btn--lg{ padding:12px 18px; }
 
@@ -194,15 +167,10 @@
       background: rgba(255,255,255,.92);
       backdrop-filter: blur(10px);
     }
-    .mnav__inner{
-      padding: 10px 0 14px;
-      display:grid;
-      gap: 6px;
-    }
+    .mnav__inner{ padding: 10px 0 14px; display:grid; gap: 6px; }
     .mnav a{
       padding: 12px 12px;
       border-radius: 12px;
-      color: var(--text);
       border: 1px solid var(--border);
       background: #fff;
     }
@@ -228,7 +196,7 @@
       border-radius:999px;
       background: rgba(255,255,255,.7);
       color:var(--muted);
-      font-weight:700;
+      font-weight:800;
       font-size:13px;
     }
     .dot{ width:8px; height:8px; border-radius:999px; background:var(--brand); display:inline-block; }
@@ -277,7 +245,7 @@
       background: linear-gradient(to top, rgba(15,23,42,.70), rgba(15,23,42,.15), transparent);
       color:#fff;
     }
-    .kicker{ margin:0; font-weight:900; font-size:18px; }
+    .kicker{ margin:0; font-weight:950; font-size:18px; }
     .sub{ margin:6px 0 12px; opacity:.92; font-size:13px; }
     .mediaCard__actions{ display:flex; gap:10px; flex-wrap:wrap; }
 
@@ -288,14 +256,11 @@
       background: rgba(255,255,255,.14);
       border: 1px solid rgba(255,255,255,.25);
       color:#fff;
-      font-weight:800;
+      font-weight:900;
       font-size:13px;
     }
     .pill:hover{ background: rgba(255,255,255,.20); }
-    .pill--primary{
-      background: rgba(225,29,46,.95);
-      border-color: rgba(225,29,46,1);
-    }
+    .pill--primary{ background: rgba(225,29,46,.95); border-color: rgba(225,29,46,1); }
     .pill--primary:hover{ background: rgba(183,15,28,.95); }
     .caption{ color:var(--muted); font-size:12px; margin:10px 4px 0; }
 
@@ -309,16 +274,10 @@
     .section__head{ margin-bottom: 18px; }
     .section__head h2{ margin:0; font-size:26px; letter-spacing:-0.01em; }
     .section__head p{ margin:6px 0 0; color:var(--muted); }
-    .section__head--split{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap;
-    }
+    .section__head--split{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 
-    /* Cards grid */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap:14px;
-    }
+    /* Cards */
+    .cards{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:14px; }
     .card{
       border:1px solid var(--border);
       border-radius: var(--radius);
@@ -328,13 +287,28 @@
     }
     .card h3{ margin:0 0 8px; font-size:16px; }
     .card p{ margin:0 0 12px; color:var(--muted); font-size:14px; }
-    .link{ color:var(--brand); font-weight:850; }
+    .link{ color:var(--brand); font-weight:900; }
     .link:hover{ text-decoration:underline; text-underline-offset:3px; }
 
-    /* How it works */
-    .miniTrust{
-      display:flex; gap:10px; flex-wrap:wrap;
+    /* Stats */
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:14px;
+      margin-top: 14px;
     }
+    .stat{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 6px 16px rgba(15,23,42,.05);
+      padding: 16px;
+    }
+    .stat strong{ display:block; font-size: 22px; letter-spacing: -.02em; }
+    .stat span{ display:block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+    /* How it works */
+    .miniTrust{ display:flex; gap:10px; flex-wrap:wrap; }
     .miniTrust__item{
       border:1px solid var(--border);
       background:#fff;
@@ -367,122 +341,11 @@
       display:grid; place-items:center;
       background: rgba(225,29,46,.10);
       color: var(--brand);
-      font-weight:900;
+      font-weight:950;
       flex: 0 0 auto;
     }
     .step h3{ margin:0 0 6px; font-size:16px; }
     .step p{ margin:0; color:var(--muted); font-size:14px; }
-
-    /* Products / categories with filter */
-    .toolsBar{
-      display:flex; gap:12px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
-      margin-bottom: 14px;
-    }
-    .filters{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-    }
-    .chip{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-weight:850;
-      color: var(--muted);
-      cursor:pointer;
-      transition: background .15s ease, color .15s ease, border-color .15s ease;
-      user-select:none;
-    }
-    .chip:hover{ background: var(--soft); color: var(--text); }
-    .chip[aria-pressed="true"]{
-      border-color: rgba(225,29,46,.35);
-      background: rgba(225,29,46,.08);
-      color: var(--text);
-    }
-    .searchWrap{
-      display:flex; gap:10px; align-items:center;
-      flex: 1 1 320px;
-      max-width: 460px;
-    }
-    .searchWrap input{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background:#fff;
-    }
-    .productGrid{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:14px;
-    }
-    .product{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      background:#fff;
-      box-shadow: 0 6px 16px rgba(15,23,42,.05);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-    }
-    .product__img{
-      height: 150px;
-      background:
-        radial-gradient(400px 200px at 30% 40%, rgba(225,29,46,.14), transparent 60%),
-        radial-gradient(400px 200px at 70% 60%, rgba(15,23,42,.10), transparent 60%),
-        var(--soft);
-    }
-    .product__body{ padding: 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
-    .product__meta{ display:flex; gap:8px; flex-wrap:wrap; }
-    .tag{
-      font-size: 12px;
-      font-weight: 850;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      background: #fff;
-      padding: 4px 8px;
-      border-radius: 999px;
-    }
-    .product h3{ margin:0; font-size: 15px; }
-    .product p{ margin:0; color: var(--muted); font-size: 13px; }
-    .product__foot{
-      padding: 14px;
-      border-top: 1px solid var(--border);
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .price{
-      font-weight: 950;
-      letter-spacing: -.01em;
-    }
-
-    /* Stats / proof */
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:14px;
-      margin-top: 14px;
-    }
-    .stat{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      background:#fff;
-      box-shadow: 0 6px 16px rgba(15,23,42,.05);
-      padding: 16px;
-    }
-    .stat strong{
-      display:block;
-      font-size: 22px;
-      letter-spacing: -.02em;
-    }
-    .stat span{
-      display:block;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 2px;
-    }
 
     /* References */
     .refs{
@@ -502,7 +365,7 @@
       gap:12px;
       min-height: 220px;
     }
-    .quote__stars{ letter-spacing: 2px; color: var(--brand); font-weight: 900; }
+    .quote__stars{ letter-spacing: 2px; color: var(--brand); font-weight: 950; }
     .quote blockquote{ margin:0; font-size:16px; }
     .quote__meta{ display:flex; align-items:center; gap:10px; margin-top:auto; }
     .avatar{
@@ -521,28 +384,20 @@
       padding:18px;
     }
     .logoWall p{ margin:0 0 10px; color:var(--muted); font-size:13px; }
-    .logos{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap:10px;
-    }
+    .logos{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; }
     .logo{
       border:1px dashed var(--border);
       border-radius: var(--radius-sm);
       padding:14px;
       text-align:center;
-      font-weight:900;
+      font-weight:950;
       color: rgba(15,23,42,.60);
       background: var(--soft);
       user-select:none;
     }
 
     /* FAQ */
-    .faq{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
+    .faq{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
     details{
       border:1px solid var(--border);
       border-radius: var(--radius);
@@ -553,7 +408,7 @@
     summary{
       cursor:pointer;
       list-style:none;
-      font-weight:850;
+      font-weight:900;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -572,12 +427,12 @@
     details[open] .chev{ transform: rotate(180deg); }
     details p{ margin: 10px 0 0; color:var(--muted); font-size:14px; }
 
-    /* Contact */
+    /* Contact (ONLY info; form removed; aligned cards) */
     .contactGrid{
       display:grid;
-      grid-template-columns: .9fr 1.1fr;
+      grid-template-columns: 1fr 1fr;
       gap:14px;
-      align-items:start;
+      align-items:stretch;
     }
     .contactCard{
       border:1px solid var(--border);
@@ -585,6 +440,9 @@
       background:#fff;
       box-shadow: 0 6px 16px rgba(15,23,42,.05);
       padding:18px;
+      display:flex;
+      flex-direction:column;
+      min-height: 320px;
     }
     .contactCard h3{ margin:0 0 10px; }
     .contactList{ margin:0; padding:0; list-style:none; display:grid; gap:10px; }
@@ -595,6 +453,13 @@
       background: rgba(255,255,255,.7);
     }
     .contactList small{ display:block; color:var(--muted); }
+    .contactActions{
+      margin-top:auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding-top: 12px;
+    }
     .map{
       height: 220px;
       border-radius: var(--radius);
@@ -605,32 +470,10 @@
         var(--soft);
       display:grid; place-items:center;
       color: rgba(15,23,42,.55);
-      font-weight: 900;
+      font-weight: 950;
       user-select:none;
       margin-top: 12px;
     }
-
-    form{ display:grid; gap:12px; }
-    .fieldRow{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    label{ font-weight: 800; font-size: 13px; }
-    input, textarea, select{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid var(--border);
-      background:#fff;
-      color: var(--text);
-      font: inherit;
-      outline:none;
-      transition: box-shadow .15s ease, border-color .15s ease;
-    }
-    textarea{ min-height: 120px; resize: vertical; }
-    input:focus, textarea:focus, select:focus{
-      box-shadow: var(--ring);
-      border-color: rgba(225,29,46,.35);
-    }
-    .formNote{ margin:0; font-size:12px; color:var(--muted); }
-    .formActions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
 
     /* Footer */
     .footer{
@@ -689,7 +532,7 @@
       gap:8px;
       padding: 12px 14px;
       border-radius: 999px;
-      font-weight: 900;
+      font-weight: 950;
       border: 1px solid var(--border);
       background: #fff;
       cursor:pointer;
@@ -703,9 +546,6 @@
     .floatBtn--primary:hover{ background: var(--brand-dark); }
 
     /* Responsive */
-    @media (max-width: 1100px){
-      .productGrid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-    }
     @media (max-width: 980px){
       .nav{ display:none; }
       .burger{ display:inline-block; }
@@ -717,19 +557,15 @@
       .faq{ grid-template-columns: 1fr; }
       .contactGrid{ grid-template-columns: 1fr; }
       .footer__inner{ grid-template-columns: 1fr; }
-      .fieldRow{ grid-template-columns: 1fr; }
-      .productGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .cards{ grid-template-columns: 1fr; }
+      .stats{ grid-template-columns: 1fr; }
       .floatCta{ display:block; }
-      body{ padding-bottom: 88px; } /* space for floating CTA */
-    }
-    @media (max-width: 520px){
-      .productGrid{ grid-template-columns: 1fr; }
+      body{ padding-bottom: 88px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Top bar -->
   <header class="topbar" aria-label="Kontakt">
     <div class="container topbar__inner">
       <div class="topbar__left">
@@ -743,7 +579,6 @@
     </div>
   </header>
 
-  <!-- Main header -->
   <header class="header" aria-label="Hlavní navigace">
     <div class="container header__inner">
       <a class="brand" href="#top" aria-label="CT Praha – domů">
@@ -756,7 +591,6 @@
 
       <nav class="nav" aria-label="Menu">
         <a href="#sluzby">Služby</a>
-        <a href="#kategorie">Kategorie</a>
         <a href="#jak">Jak to funguje</a>
         <a href="#reference">Reference</a>
         <a href="#faq">FAQ</a>
@@ -776,7 +610,6 @@
     <div class="mnav" id="mnav" aria-label="Mobilní menu">
       <div class="container mnav__inner">
         <a href="#sluzby">Služby</a>
-        <a href="#kategorie">Kategorie</a>
         <a href="#jak">Jak to funguje</a>
         <a href="#reference">Reference</a>
         <a href="#faq">FAQ</a>
@@ -787,7 +620,6 @@
   </header>
 
   <main id="top">
-    <!-- HERO -->
     <section class="hero" aria-label="Úvod">
       <div class="container hero__grid">
         <div class="hero__copy">
@@ -808,7 +640,7 @@
 
           <div class="hero__buttons">
             <a class="btn btn--primary btn--lg" href="#kontakt">Kontaktujte nás</a>
-            <a class="btn btn--soft btn--lg" href="#kategorie">Prohlédnout kategorie</a>
+            <a class="btn btn--soft btn--lg" href="eshop.html">Otevřít e-shop</a>
           </div>
 
           <ul class="trust" aria-label="Výhody">
@@ -840,7 +672,6 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section class="section" id="sluzby">
       <div class="container">
         <div class="section__head">
@@ -868,7 +699,6 @@
           </article>
         </div>
 
-        <!-- Proof stats -->
         <div class="stats" aria-label="Důkazy důvěry">
           <div class="stat"><strong>10+ let</strong><span>zkušeností v oboru</span></div>
           <div class="stat"><strong>100+ firem</strong><span>v pravidelné péči</span></div>
@@ -878,143 +708,7 @@
       </div>
     </section>
 
-    <!-- CATEGORIES / PRODUCTS WITH FILTER -->
-    <section class="section section--alt" id="kategorie">
-      <div class="container">
-        <div class="section__head section__head--split">
-          <div>
-            <h2>Kategorie a rychlý výběr</h2>
-            <p>Filtrujte podle oblasti. (Data si pak napojíš na reálný sortiment.)</p>
-          </div>
-
-          <div class="searchWrap" aria-label="Vyhledávání">
-            <input id="search" type="search" placeholder="Hledat (např. laminace, tisk, fólie…)" />
-          </div>
-        </div>
-
-        <div class="toolsBar">
-          <div class="filters" aria-label="Filtry">
-            <button class="chip" type="button" aria-pressed="true" data-filter="all">Vše</button>
-            <button class="chip" type="button" aria-pressed="false" data-filter="tech">Technika</button>
-            <button class="chip" type="button" aria-pressed="false" data-filter="lam">Laminace</button>
-            <button class="chip" type="button" aria-pressed="false" data-filter="folie">Fólie</button>
-            <button class="chip" type="button" aria-pressed="false" data-filter="servis">Servis</button>
-          </div>
-
-          <a class="btn btn--primary" href="eshop.html">Otevřít e-shop</a>
-        </div>
-
-        <div class="productGrid" id="productGrid">
-          <!-- Product cards (static demo) -->
-          <article class="product" data-cat="tech" data-name="Multifunkční tiskárna A4">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Technika</span><span class="tag">B2B</span></div>
-              <h3>Multifunkční tiskárna A4</h3>
-              <p>Spolehlivá pro kanceláře. Doporučíme konfiguraci + servis.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">na dotaz</span>
-              <a class="btn btn--ghost" href="#kontakt">Zajímá mě</a>
-            </div>
-          </article>
-
-          <article class="product" data-cat="lam" data-name="Laminace dokumentů A3">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Laminace</span><span class="tag">Rychle</span></div>
-              <h3>Laminace dokumentů A3</h3>
-              <p>Ochrana dokumentů, štítků a materiálů pro provozy.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">od … Kč</span>
-              <a class="btn btn--ghost" href="#kontakt">Domluvit</a>
-            </div>
-          </article>
-
-          <article class="product" data-cat="folie" data-name="Ochranné fólie na povrchy">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Fólie</span><span class="tag">Aplikace</span></div>
-              <h3>Ochranné fólie na povrchy</h3>
-              <p>Proti oděru, špíně a mechanickému poškození.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">na dotaz</span>
-              <a class="btn btn--ghost" href="#kontakt">Zjistit možnosti</a>
-            </div>
-          </article>
-
-          <article class="product" data-cat="servis" data-name="Servis kancelářské techniky">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Servis</span><span class="tag">Smluvně</span></div>
-              <h3>Servis kancelářské techniky</h3>
-              <p>Jednorázově i dlouhodobě. SLA podle potřeb firmy.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">na dotaz</span>
-              <a class="btn btn--ghost" href="#kontakt">Chci servis</a>
-            </div>
-          </article>
-
-          <article class="product" data-cat="tech" data-name="Skener dokumentů">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Technika</span><span class="tag">Workflow</span></div>
-              <h3>Skener dokumentů</h3>
-              <p>Digitalizace a nastavení procesu skenování pro týmy.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">na dotaz</span>
-              <a class="btn btn--ghost" href="#kontakt">Probrat</a>
-            </div>
-          </article>
-
-          <article class="product" data-cat="folie" data-name="Laminační fólie a role">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Fólie</span><span class="tag">Spotřeba</span></div>
-              <h3>Laminační fólie a role</h3>
-              <p>Výběr správné tloušťky a typu podle použití.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">od … Kč</span>
-              <a class="btn btn--ghost" href="eshop.html">Do e-shopu</a>
-            </div>
-          </article>
-
-          <article class="product" data-cat="lam" data-name="Laminace velkoformát">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Laminace</span><span class="tag">Provoz</span></div>
-              <h3>Laminace velkoformát</h3>
-              <p>Pro cedule, vývěsky, návody, provozní označení.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">na dotaz</span>
-              <a class="btn btn--ghost" href="#kontakt">Poptat</a>
-            </div>
-          </article>
-
-          <article class="product" data-cat="servis" data-name="Preventivní prohlídky">
-            <div class="product__img" aria-hidden="true"></div>
-            <div class="product__body">
-              <div class="product__meta"><span class="tag">Servis</span><span class="tag">Prevence</span></div>
-              <h3>Preventivní prohlídky</h3>
-              <p>Méně výpadků a lepší životnost zařízení v provozu.</p>
-            </div>
-            <div class="product__foot">
-              <span class="price">na dotaz</span>
-              <a class="btn btn--ghost" href="#kontakt">Domluvit</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="section" id="jak">
+    <section class="section section--alt" id="jak">
       <div class="container">
         <div class="section__head section__head--split">
           <div>
@@ -1054,8 +748,7 @@
       </div>
     </section>
 
-    <!-- REFERENCES -->
-    <section class="section section--alt" id="reference">
+    <section class="section" id="reference">
       <div class="container">
         <div class="section__head">
           <h2>Reference</h2>
@@ -1091,8 +784,7 @@
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section" id="faq">
+    <section class="section section--alt" id="faq">
       <div class="container">
         <div class="section__head">
           <h2>FAQ</h2>
@@ -1123,12 +815,12 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section section--alt" id="kontakt">
+    <!-- Contact: two aligned cards, NO "Napište nám" -->
+    <section class="section" id="kontakt">
       <div class="container">
         <div class="section__head">
           <h2>Kontakt</h2>
-          <p>Napište nám. Pokud nemáte parametry, stačí popsat situaci.</p>
+          <p>Rychlé spojení. Pokud chceš, doplníme později formulář až budeš chtít.</p>
         </div>
 
         <div class="contactGrid">
@@ -1153,74 +845,26 @@
               </li>
             </ul>
 
-            <div class="map" aria-label="Mapa">MAPA / embed sem Google mapu</div>
+            <div class="contactActions">
+              <a class="btn btn--primary" href="tel:+420000000000">Zavolat</a>
+              <a class="btn btn--ghost" href="mailto:info@ctpraha.cz?subject=Kontakt%20CT%20Praha">Napsat e-mail</a>
+              <a class="btn btn--soft" href="eshop.html">E-shop</a>
+            </div>
           </aside>
 
-          <section class="contactCard" aria-label="Kontaktní formulář">
-            <h3>Napište nám</h3>
+          <aside class="contactCard" aria-label="Mapa a rychlé info">
+            <h3>Kde nás najdete</h3>
+            <p style="margin:0; color:var(--muted); font-size:14px;">
+              Sem dej Google Maps embed nebo aspoň přesnou adresu + parkování / vjezd pro servis.
+            </p>
 
-            <form action="#" method="post">
-              <div class="fieldRow">
-                <div>
-                  <label for="name">Jméno</label>
-                  <input id="name" name="name" autocomplete="name" placeholder="Jan Novák" required />
-                </div>
-                <div>
-                  <label for="company">Firma</label>
-                  <input id="company" name="company" autocomplete="organization" placeholder="Název firmy" />
-                </div>
-              </div>
+            <div class="map" aria-label="Mapa">MAPA / embed sem Google mapu</div>
 
-              <div class="fieldRow">
-                <div>
-                  <label for="email">E-mail</label>
-                  <input id="email" name="email" type="email" autocomplete="email" placeholder="jan@firma.cz" required />
-                </div>
-                <div>
-                  <label for="phone">Telefon</label>
-                  <input id="phone" name="phone" autocomplete="tel" placeholder="+420 ..." />
-                </div>
-              </div>
-
-              <div class="fieldRow">
-                <div>
-                  <label for="topic">Oblast</label>
-                  <select id="topic" name="topic">
-                    <option>Kancelářská technika</option>
-                    <option>Laminace</option>
-                    <option>Fólie</option>
-                    <option>Servis</option>
-                    <option>Jiné</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="when">Termín (volitelné)</label>
-                  <select id="when" name="when">
-                    <option>—</option>
-                    <option>Co nejdřív</option>
-                    <option>Do týdne</option>
-                    <option>Do měsíce</option>
-                    <option>Domluvou</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label for="msg">Zpráva</label>
-                <textarea id="msg" name="msg" placeholder="Co potřebujete? Kde je to nasazené? Jaké máte požadavky?" required></textarea>
-              </div>
-
-              <p class="formNote">
-                Odesláním souhlasíte se zpracováním údajů pro účely vyřízení zprávy.
-              </p>
-
-              <div class="formActions">
-                <button class="btn btn--primary btn--lg" type="submit">Odeslat</button>
-                <a class="btn btn--ghost btn--lg" href="mailto:info@ctpraha.cz?subject=Kontakt%20CT%20Praha">Radši e-mail</a>
-                <a class="btn btn--soft btn--lg" href="tel:+420000000000">Zavolat</a>
-              </div>
-            </form>
-          </section>
+            <div class="contactActions">
+              <a class="btn btn--primary" href="#top">Zpět nahoru</a>
+              <a class="btn btn--ghost" href="#sluzby">Služby</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -1235,7 +879,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="footer" aria-label="Patička">
     <div class="container footer__inner">
       <div>
@@ -1250,7 +893,6 @@
         <h4>Navigace</h4>
         <ul>
           <li><a href="#sluzby">Služby</a></li>
-          <li><a href="#kategorie">Kategorie</a></li>
           <li><a href="#jak">Jak to funguje</a></li>
           <li><a href="#reference">Reference</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -1285,7 +927,6 @@
       mnav.style.display = isOpen ? 'none' : 'block';
     });
 
-    // Close mobile menu after click
     mnav?.addEventListener('click', (e) => {
       const t = e.target;
       if (t && t.tagName === 'A') {
@@ -1294,51 +935,7 @@
       }
     });
 
-    // Footer year
     document.getElementById('year').textContent = String(new Date().getFullYear());
-
-    // Products filter + search
-    const chips = Array.from(document.querySelectorAll('.chip'));
-    const search = document.getElementById('search');
-    const items = Array.from(document.querySelectorAll('.product'));
-
-    let activeFilter = 'all';
-    let query = '';
-
-    function applyFilter(){
-      const q = query.trim().toLowerCase();
-      let shown = 0;
-
-      items.forEach(el => {
-        const cat = el.dataset.cat || '';
-        const name = (el.dataset.name || '').toLowerCase();
-        const text = (el.innerText || '').toLowerCase();
-        const matchesCat = activeFilter === 'all' || cat === activeFilter;
-        const matchesQuery = !q || name.includes(q) || text.includes(q);
-
-        const ok = matchesCat && matchesQuery;
-        el.style.display = ok ? '' : 'none';
-        if (ok) shown++;
-      });
-
-      // (Volitelně) můžeš sem přidat "0 výsledků" badge.
-    }
-
-    chips.forEach(btn => {
-      btn.addEventListener('click', () => {
-        chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
-        btn.setAttribute('aria-pressed', 'true');
-        activeFilter = btn.dataset.filter || 'all';
-        applyFilter();
-      });
-    });
-
-    search?.addEventListener('input', (e) => {
-      query = e.target.value || '';
-      applyFilter();
-    });
-
-    applyFilter();
   </script>
 </body>
 </html>

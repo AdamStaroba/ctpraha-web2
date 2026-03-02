@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="CT Praha e-shop – kancelářská technika, laminace, fólie a příslušenství." />
+  <meta name="description" content="CT Praha e-shop – kancelářská a laminovací technika, fólie a příslušenství." />
   <title>CT Praha | E-shop</title>
 
   <style>
@@ -11,18 +11,19 @@
       --bg:#ffffff;
       --text:#0f172a;
       --muted:#475569;
+      --muted2:#64748b;
       --border:#e8eef6;
       --soft:#f6f7fb;
       --shadow:0 12px 30px rgba(15,23,42,.08);
       --shadow2:0 6px 18px rgba(15,23,42,.08);
       --radius:18px;
-      --radius-sm:14px;
       --container:1180px;
 
       --brand:#e11d2e;
       --brand-dark:#b70f1c;
       --ring: 0 0 0 4px rgba(225,29,46,.22);
     }
+
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
@@ -51,7 +52,7 @@
       width:42px; height:42px; border-radius:14px;
       background:var(--brand); color:#fff;
       display:grid; place-items:center;
-      font-weight:900; letter-spacing:.6px;
+      font-weight:950; letter-spacing:.6px;
       box-shadow:var(--shadow2);
       user-select:none;
     }
@@ -63,7 +64,7 @@
       padding:10px 14px;
       border-radius:999px;
       border:1px solid transparent;
-      font-weight:800;
+      font-weight:900;
       cursor:pointer;
       transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
       white-space:nowrap;
@@ -84,11 +85,10 @@
     }
     .grid{
       display:grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 430px 1fr;
       gap: 14px;
       align-items:start;
     }
-
     .panel{
       border:1px solid var(--border);
       border-radius: var(--radius);
@@ -97,6 +97,7 @@
       padding: 16px;
     }
 
+    /* Toolbar */
     .toolbar{
       display:flex; gap:12px; flex-wrap:wrap;
       align-items:center; justify-content:space-between;
@@ -104,7 +105,7 @@
     }
     .search{
       flex: 1 1 320px;
-      max-width: 520px;
+      max-width: 620px;
       display:flex;
       gap:10px;
       align-items:center;
@@ -120,12 +121,31 @@
     }
     input[type="search"]:focus, select:focus{ box-shadow: var(--ring); border-color: rgba(225,29,46,.35); }
 
-    .cats{
-      display:grid;
-      gap: 8px;
-      margin-top: 10px;
+    .small{ font-size: 12px; color: var(--muted); margin: 10px 0 0; }
+
+    /* Tree title */
+    .treeTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
     }
-    .cat{
+    .pillCount{
+      font-weight: 950;
+      border:1px solid var(--border);
+      background: var(--soft);
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: rgba(15,23,42,.70);
+    }
+
+    /* Folders (details/summary) */
+    details{ border-radius: var(--radius); }
+    details summary::-webkit-details-marker{ display:none; }
+    summary{ list-style:none; }
+
+    .folder{
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -135,23 +155,90 @@
       border:1px solid var(--border);
       background:#fff;
       cursor:pointer;
-      font-weight: 850;
-      color: var(--muted);
+      font-weight: 950;
+      color: var(--text);
+      user-select:none;
     }
-    .cat:hover{ background: var(--soft); color: var(--text); }
-    .cat[aria-pressed="true"]{
+    .folder:hover{ background: var(--soft); }
+    .folder:focus{ outline:none; box-shadow: var(--ring); }
+
+    /* little separators to make the tree easier to scan */
+    details + details{ margin-top:10px; }
+
+    .caret{
+      width:28px; height:28px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: var(--soft);
+      display:grid; place-items:center;
+      transition: transform .15s ease;
+      color: rgba(15,23,42,.65);
+      flex: 0 0 auto;
+    }
+    details[open] > summary .caret{ transform: rotate(180deg); }
+
+    .node{
+      margin-top: 10px;
+      padding-left: 14px;
+      display:grid;
+      gap:10px;
+      position: relative;
+    }
+    /* subtle guide line */
+    .node:before{
+      content:"";
+      position:absolute;
+      left:6px;
+      top:2px;
+      bottom:2px;
+      width:1px;
+      background: rgba(15,23,42,.06);
+    }
+
+    /* Leaf filter buttons */
+    .subcats{ display:grid; gap:8px; }
+
+    .subcat{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+
+      /* less bold + cleaner */
+      font-weight: 650;
+      font-size: 14px;
+      color: var(--muted2);
+
+      text-align:left;
+      width:100%;
+      transition: background .15s ease, border-color .15s ease, color .15s ease, transform .12s ease;
+    }
+    .subcat:hover{
+      background: var(--soft);
+      color: var(--text);
+    }
+    .subcat:active{ transform: translateY(1px); }
+    .subcat[aria-pressed="true"]{
       border-color: rgba(225,29,46,.35);
       background: rgba(225,29,46,.08);
       color: var(--text);
+      font-weight: 750;
     }
+
     .badge{
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 850;
       border:1px solid var(--border);
       background: var(--soft);
       padding: 4px 8px;
       border-radius: 999px;
       color: rgba(15,23,42,.65);
+      flex: 0 0 auto;
     }
 
     /* Products */
@@ -168,7 +255,7 @@
       overflow:hidden;
       display:flex;
       flex-direction:column;
-      min-height: 320px;
+      min-height: 300px;
     }
     .pimg{
       height: 160px;
@@ -181,7 +268,7 @@
     .meta{ display:flex; gap:8px; flex-wrap:wrap; }
     .tag{
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 950;
       color: var(--muted);
       border: 1px solid var(--border);
       background: #fff;
@@ -200,53 +287,6 @@
       justify-content:space-between;
     }
     .price{ font-weight: 950; letter-spacing: -.01em; }
-    .small{ font-size: 12px; color: var(--muted); }
-
-    /* Cart */
-    .cartTop{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .cartCount{
-      margin-left:auto;
-      font-weight: 950;
-      border:1px solid var(--border);
-      background: var(--soft);
-      padding: 6px 10px;
-      border-radius: 999px;
-    }
-    .cartItems{
-      margin-top: 12px;
-      display:grid;
-      gap: 10px;
-    }
-    .cartItem{
-      border:1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px;
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .cartThumb{
-      width: 44px; height: 44px;
-      border-radius: 14px;
-      background: var(--soft);
-      border:1px solid var(--border);
-      flex:0 0 auto;
-    }
-    .cartItem strong{ display:block; font-size: 13px; }
-    .cartItem span{ display:block; font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .cartTotal{
-      margin-top: 12px;
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-weight: 950;
-    }
 
     /* Footer */
     .footer{
@@ -259,7 +299,7 @@
     @media (max-width: 1100px){
       .products{ grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
-    @media (max-width: 920px){
+    @media (max-width: 980px){
       .grid{ grid-template-columns: 1fr; }
       .products{ grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
@@ -280,7 +320,7 @@
         </span>
       </a>
 
-      <div style="display:flex; gap:10px; align-items:center;">
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
         <a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a>
         <a class="btn btn--primary" href="index.html">Hlavní web</a>
       </div>
@@ -291,7 +331,7 @@
     <div class="container">
       <div class="toolbar" aria-label="Nástroje e-shopu">
         <div class="search">
-          <input id="q" type="search" placeholder="Hledat v e-shopu (např. fólie, laminace, toner…)" />
+          <input id="q" type="search" placeholder="Hledat (BOPP, PET, Arctic Universal, SoftTouch…)" />
         </div>
 
         <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -306,126 +346,540 @@
       </div>
 
       <div class="grid">
-        <!-- Sidebar -->
-        <aside class="panel" aria-label="Filtry a košík">
-          <div class="cartTop">
+        <!-- SIDEBAR -->
+        <aside class="panel" aria-label="Kategorie a podkategorie">
+          <div class="treeTitle">
             <strong>Kategorie</strong>
-            <span class="badge" id="countShown">0</span>
+            <span class="pillCount" id="countShown">0</span>
           </div>
 
-          <div class="cats" id="cats">
-            <button class="cat" type="button" aria-pressed="true" data-cat="all">Vše <span class="badge" data-b="all">—</span></button>
-            <button class="cat" type="button" aria-pressed="false" data-cat="tech">Technika <span class="badge" data-b="tech">—</span></button>
-            <button class="cat" type="button" aria-pressed="false" data-cat="lam">Laminace <span class="badge" data-b="lam">—</span></button>
-            <button class="cat" type="button" aria-pressed="false" data-cat="folie">Fólie <span class="badge" data-b="folie">—</span></button>
-            <button class="cat" type="button" aria-pressed="false" data-cat="spot">Spotřební materiál <span class="badge" data-b="spot">—</span></button>
+          <!-- Always visible -->
+          <div class="subcats" style="margin-bottom:12px;">
+            <button class="subcat" type="button" aria-pressed="true" data-filter="all">
+              Vše <span class="badge" data-b="all">—</span>
+            </button>
           </div>
 
-          <div style="height:14px;"></div>
-
-          <div class="panel" style="box-shadow:none; padding:0; border:none;">
-            <div class="cartTop">
-              <strong>Košík (demo UI)</strong>
-              <span class="cartCount" id="cartCount">0</span>
+          <!-- KANCELÁŘSKÁ TECHNIKA (default zavřené) -->
+          <details>
+            <summary class="folder" tabindex="0">
+              <span>KANCELÁŘSKÁ TECHNIKA</span>
+              <span class="caret" aria-hidden="true">⌄</span>
+            </summary>
+            <div class="node">
+              <div class="subcats">
+                <button class="subcat" type="button" aria-pressed="false" data-filter="skartovacky">
+                  Skartovačky <span class="badge" data-b="skartovacky">—</span>
+                </button>
+                <button class="subcat" type="button" aria-pressed="false" data-filter="rezacky">
+                  Řezačky <span class="badge" data-b="rezacky">—</span>
+                </button>
+                <button class="subcat" type="button" aria-pressed="false" data-filter="vazba">
+                  Stroje na vazbu <span class="badge" data-b="vazba">—</span>
+                </button>
+                <button class="subcat" type="button" aria-pressed="false" data-filter="kapsove-laminatory">
+                  Kapsové laminátory <span class="badge" data-b="kapsove-laminatory">—</span>
+                </button>
+              </div>
             </div>
+          </details>
 
-            <div class="cartItems" id="cartItems">
-              <!-- demo items -->
+          <!-- LAMINOVACÍ TECHNIKA (default zavřené) -->
+          <details>
+            <summary class="folder" tabindex="0">
+              <span>LAMINOVACÍ TECHNIKA</span>
+              <span class="caret" aria-hidden="true">⌄</span>
+            </summary>
+
+            <div class="node">
+
+              <!-- ROLOVÉ LAMINÁTORY -->
+              <details>
+                <summary class="folder" tabindex="0">
+                  <span>Rolové Laminátory</span>
+                  <span class="caret" aria-hidden="true">⌄</span>
+                </summary>
+                <div class="node">
+                  <div class="subcats">
+                    <button class="subcat" type="button" aria-pressed="false" data-filter="rolove-maloformatove">
+                      Maloformátové (do 65 cm) <span class="badge" data-b="rolove-maloformatove">—</span>
+                    </button>
+                    <button class="subcat" type="button" aria-pressed="false" data-filter="rolove-sirokoformatove">
+                      Širokoformátové (do 165 cm) <span class="badge" data-b="rolove-sirokoformatove">—</span>
+                    </button>
+                    <button class="subcat" type="button" aria-pressed="false" data-filter="rolove-prislusenstvi">
+                      Příslušenství (ramena / stojany) <span class="badge" data-b="rolove-prislusenstvi">—</span>
+                    </button>
+                  </div>
+                </div>
+              </details>
+
+              <!-- LAMINOVACÍ FÓLIE -->
+              <details>
+                <summary class="folder" tabindex="0">
+                  <span>Laminovací Fólie</span>
+                  <span class="caret" aria-hidden="true">⌄</span>
+                </summary>
+
+                <div class="node">
+
+                  <!-- PODLE DRUHU FÓLIE -->
+                  <details>
+                    <summary class="folder" tabindex="0">
+                      <span>Podle druhu fólie</span>
+                      <span class="caret" aria-hidden="true">⌄</span>
+                    </summary>
+                    <div class="node">
+                      <div class="subcats">
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-druh-bopp">
+                          Polypropylenové fólie (BOPP) <span class="badge" data-b="folie-druh-bopp">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-druh-pet">
+                          Polyesterové fólie (PET) <span class="badge" data-b="folie-druh-pet">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-druh-tlak">
+                          Filmy aktivované tlakem <span class="badge" data-b="folie-druh-tlak">—</span>
+                        </button>
+                      </div>
+                    </div>
+                  </details>
+
+                  <!-- PODLE POVRCHOVÉ ÚPRAVY -->
+                  <details>
+                    <summary class="folder" tabindex="0">
+                      <span>Podle povrchové úpravy</span>
+                      <span class="caret" aria-hidden="true">⌄</span>
+                    </summary>
+                    <div class="node">
+                      <div class="subcats">
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-povrch-leskla">
+                          Lesklá <span class="badge" data-b="folie-povrch-leskla">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-povrch-matna">
+                          Matná <span class="badge" data-b="folie-povrch-matna">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-povrch-antiscuff">
+                          AntiScuff – oděruodolná <span class="badge" data-b="folie-povrch-antiscuff">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-povrch-softtouch">
+                          SoftTouch – sametová fólie <span class="badge" data-b="folie-povrch-softtouch">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-povrch-metalicka">
+                          Metalická fólie <span class="badge" data-b="folie-povrch-metalicka">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-povrch-ostatni">
+                          Ostatní speciální fólie <span class="badge" data-b="folie-povrch-ostatni">—</span>
+                        </button>
+                      </div>
+                    </div>
+                  </details>
+
+                  <!-- PODLE DRUHU LEPIDLA -->
+                  <details>
+                    <summary class="folder" tabindex="0">
+                      <span>Podle druhu lepidla</span>
+                      <span class="caret" aria-hidden="true">⌄</span>
+                    </summary>
+                    <div class="node">
+                      <div class="subcats">
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-lepidlo-standard">
+                          Standardní lepidlo <span class="badge" data-b="folie-lepidlo-standard">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-lepidlo-vyssi">
+                          Lepidlo s vyšší adhezí / SuperStick <span class="badge" data-b="folie-lepidlo-vyssi">—</span>
+                        </button>
+                        <button class="subcat" type="button" aria-pressed="false" data-filter="folie-lepidlo-samolepici">
+                          Samolepící lepidlo <span class="badge" data-b="folie-lepidlo-samolepici">—</span>
+                        </button>
+                      </div>
+                    </div>
+                  </details>
+
+                </div>
+              </details>
+
+              <details>
+                <summary class="folder" tabindex="0">
+                  <span>Tonerové Efektové</span>
+                  <span class="caret" aria-hidden="true">⌄</span>
+                </summary>
+                <div class="node">
+                  <div class="subcats">
+                    <button class="subcat" type="button" aria-pressed="false" data-filter="tonerove-efektove-folie">
+                      Tonerové efektové fólie <span class="badge" data-b="tonerove-efektove-folie">—</span>
+                    </button>
+                  </div>
+                </div>
+              </details>
+
+              <details>
+                <summary class="folder" tabindex="0">
+                  <span>Antibakteriální Fólie</span>
+                  <span class="caret" aria-hidden="true">⌄</span>
+                </summary>
+                <div class="node">
+                  <div class="subcats">
+                    <button class="subcat" type="button" aria-pressed="false" data-filter="antibakterialni-folie">
+                      Antibakteriální fólie <span class="badge" data-b="antibakterialni-folie">—</span>
+                    </button>
+                  </div>
+                </div>
+              </details>
+
+              <details>
+                <summary class="folder" tabindex="0">
+                  <span>Bazar - Použité Stoje</span>
+                  <span class="caret" aria-hidden="true">⌄</span>
+                </summary>
+                <div class="node">
+                  <div class="subcats">
+                    <button class="subcat" type="button" aria-pressed="false" data-filter="bazar">
+                      Bazar použitých strojů <span class="badge" data-b="bazar">—</span>
+                    </button>
+                  </div>
+                </div>
+              </details>
+
             </div>
+          </details>
 
-            <div class="cartTotal">
-              <span>Celkem</span>
-              <span id="cartTotal">0 Kč</span>
-            </div>
-
-            <div style="height:10px;"></div>
-
-            <button class="btn btn--primary" type="button" style="width:100%;">Pokračovat (demo)</button>
-            <div style="height:8px;"></div>
-            <p class="small">Pozn.: Je to statická šablona. Napojení na reálný košík doděláš v backendu.</p>
-          </div>
+          <p class="small">
+            Složky (📁) se jen rozbalují. Filtrování dělají až nejnižší položky (tlačítka).
+          </p>
         </aside>
 
-        <!-- Products -->
+        <!-- PRODUCTS -->
         <section class="panel" aria-label="Produkty">
           <div class="products" id="products">
-            <article class="product" data-cat="tech" data-name="Multifunkční tiskárna A4" data-price="19990">
+
+            <!-- DEMO kancelářská technika -->
+            <article class="product" data-subs="skartovacky" data-name="Skartovačka pro kancelář" data-price="4990">
               <div class="pimg" aria-hidden="true"></div>
-              <div class="pbody">
-                <div class="meta"><span class="tag">Technika</span><span class="tag">Doporučené</span></div>
-                <h3>Multifunkční tiskárna A4</h3>
-                <p>Pro kanceláře. Konfigurace + servis.</p>
-              </div>
-              <div class="pfoot">
-                <span class="price">19 990 Kč</span>
-                <button class="btn btn--ghost add" type="button">Do košíku</button>
-              </div>
+              <div class="pbody"><div class="meta"><span class="tag">Skartovačky</span><span class="tag">B2B</span></div>
+                <h3>Skartovačka pro kancelář</h3><p>Pro menší až střední provoz, stabilní výkon.</p></div>
+              <div class="pfoot"><span class="price">4 990 Kč</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
             </article>
 
-            <article class="product" data-cat="lam" data-name="Laminátor A3" data-price="3490">
+            <article class="product" data-subs="rezacky" data-name="Páková řezačka A3" data-price="2290">
               <div class="pimg" aria-hidden="true"></div>
-              <div class="pbody">
-                <div class="meta"><span class="tag">Laminace</span><span class="tag">Provoz</span></div>
-                <h3>Laminátor A3</h3>
-                <p>Jednoduché ovládání, stabilní výkon.</p>
-              </div>
-              <div class="pfoot">
-                <span class="price">3 490 Kč</span>
-                <button class="btn btn--ghost add" type="button">Do košíku</button>
-              </div>
+              <div class="pbody"><div class="meta"><span class="tag">Řezačky</span><span class="tag">A3</span></div>
+                <h3>Páková řezačka A3</h3><p>Přesný řez, vhodné do kanceláře i školy.</p></div>
+              <div class="pfoot"><span class="price">2 290 Kč</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
             </article>
 
-            <article class="product" data-cat="folie" data-name="Ochranná fólie – čirá" data-price="590">
+            <article class="product" data-subs="vazba" data-name="Stroj na kroužkovou vazbu" data-price="6990">
               <div class="pimg" aria-hidden="true"></div>
-              <div class="pbody">
-                <div class="meta"><span class="tag">Fólie</span><span class="tag">Čirá</span></div>
-                <h3>Ochranná fólie – čirá</h3>
-                <p>Pro ochranu povrchů, snadná aplikace.</p>
-              </div>
-              <div class="pfoot">
-                <span class="price">590 Kč</span>
-                <button class="btn btn--ghost add" type="button">Do košíku</button>
-              </div>
+              <div class="pbody"><div class="meta"><span class="tag">Vazba</span><span class="tag">Kroužek</span></div>
+                <h3>Stroj na kroužkovou vazbu</h3><p>Pro prezentace, manuály a interní dokumenty.</p></div>
+              <div class="pfoot"><span class="price">6 990 Kč</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
             </article>
 
-            <article class="product" data-cat="spot" data-name="Laminační kapsy A4 (100 ks)" data-price="249">
+            <article class="product" data-subs="kapsove-laminatory" data-name="Kapsový laminátor A3" data-price="3490">
               <div class="pimg" aria-hidden="true"></div>
-              <div class="pbody">
-                <div class="meta"><span class="tag">Spotřeba</span><span class="tag">A4</span></div>
-                <h3>Laminační kapsy A4 (100 ks)</h3>
-                <p>Různé tloušťky dle použití.</p>
-              </div>
-              <div class="pfoot">
-                <span class="price">249 Kč</span>
-                <button class="btn btn--ghost add" type="button">Do košíku</button>
-              </div>
+              <div class="pbody"><div class="meta"><span class="tag">Kapsové laminátory</span><span class="tag">A3</span></div>
+                <h3>Kapsový laminátor A3</h3><p>Rychlý start, snadné ovládání, stabilní výsledek.</p></div>
+              <div class="pfoot"><span class="price">3 490 Kč</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
             </article>
 
-            <article class="product" data-cat="spot" data-name="Toner kompatibilní (demo)" data-price="890">
+            <!-- ROLOVÉ LAMINÁTORY -->
+            <article class="product" data-subs="rolove-maloformatove" data-name="Eagle 35" data-price="0">
               <div class="pimg" aria-hidden="true"></div>
-              <div class="pbody">
-                <div class="meta"><span class="tag">Spotřeba</span><span class="tag">Tisk</span></div>
-                <h3>Toner kompatibilní (demo)</h3>
-                <p>Vyber podle typu tiskárny.</p>
-              </div>
-              <div class="pfoot">
-                <span class="price">890 Kč</span>
-                <button class="btn btn--ghost add" type="button">Do košíku</button>
-              </div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 65 cm</span></div>
+                <h3>Eagle 35</h3><p>Maloformátový rolový laminátor (do 65 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
             </article>
 
-            <article class="product" data-cat="tech" data-name="Skener dokumentů" data-price="6990">
+            <article class="product" data-subs="rolove-maloformatove" data-name="Eagle 65" data-price="0">
               <div class="pimg" aria-hidden="true"></div>
-              <div class="pbody">
-                <div class="meta"><span class="tag">Technika</span><span class="tag">Workflow</span></div>
-                <h3>Skener dokumentů</h3>
-                <p>Rychlá digitalizace pro týmy.</p>
-              </div>
-              <div class="pfoot">
-                <span class="price">6 990 Kč</span>
-                <button class="btn btn--ghost add" type="button">Do košíku</button>
-              </div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 65 cm</span></div>
+                <h3>Eagle 65</h3><p>Maloformátový rolový laminátor (do 65 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
             </article>
+
+            <article class="product" data-subs="rolove-maloformatove" data-name="Gama 36M" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 65 cm</span></div>
+                <h3>Gama 36M</h3><p>Maloformátový rolový laminátor (do 65 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-maloformatove" data-name="Gama 36MCR" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 65 cm</span></div>
+                <h3>Gama 36MCR</h3><p>Maloformátový rolový laminátor (do 65 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-maloformatove" data-name="Gama 36MCS" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 65 cm</span></div>
+                <h3>Gama 36MCS</h3><p>Maloformátový rolový laminátor (do 65 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-maloformatove" data-name="Gama 36AS" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 65 cm</span></div>
+                <h3>Gama 36AS</h3><p>Maloformátový rolový laminátor (do 65 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-maloformatove" data-name="Gama 36AR" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 65 cm</span></div>
+                <h3>Gama 36AR</h3><p>Maloformátový rolový laminátor (do 65 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-sirokoformatove" data-name="Beta 105" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 165 cm</span></div>
+                <h3>Beta 105</h3><p>Širokoformátový rolový laminátor (do 165 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-sirokoformatove" data-name="Beta 165" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Rolový laminátor</span><span class="tag">do 165 cm</span></div>
+                <h3>Beta 165</h3><p>Širokoformátový rolový laminátor (do 165 cm).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-prislusenstvi" data-name="Čisticí guma" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Příslušenství</span><span class="tag">Údržba</span></div>
+                <h3>Čisticí guma</h3><p>Pro čištění válců a odstranění nečistot (dle typu laminátoru).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-prislusenstvi" data-name="Tekutý čistič na válce laminátorů" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Příslušenství</span><span class="tag">Údržba</span></div>
+                <h3>Tekutý čistič na válce laminátorů</h3><p>Pro pravidelnou údržbu válců (doporučené dávkování dle servisu).</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-prislusenstvi" data-name="Nastavitelná ramena (horní i dolní)" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Příslušenství</span><span class="tag">Naviny fólií</span></div>
+                <h3>Nastavitelná ramena (horní i dolní)</h3><p>Pro velké naviny laminovacích fólií – kompatibilita dle modelu.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-prislusenstvi" data-name="Redukce středovek rolí (25 mm / 76 mm)" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Příslušenství</span><span class="tag">Redukce</span></div>
+                <h3>Redukce středovek rolí (25 mm / 76 mm)</h3><p>Adaptéry pro různé průměry dutinek – dle typu rolí a stroje.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="rolove-prislusenstvi" data-name="Stojan pod laminátor" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Příslušenství</span><span class="tag">Stojan</span></div>
+                <h3>Stojan pod laminátor</h3><p>Stabilní podstavec pro provoz – výběr dle rozměrů laminátoru.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <!-- BOPP -->
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-matna folie-lepidlo-vyssi" data-name="BOPP s lepidlem Superstick matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Matná</span><span class="tag">SuperStick</span></div>
+                <h3>BOPP s lepidlem Superstick matná</h3><p>Vyšší adheze / SuperStick.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-leskla folie-lepidlo-vyssi" data-name="BOPP s lepidlem Superstick lesklá" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Lesklá</span><span class="tag">SuperStick</span></div>
+                <h3>BOPP s lepidlem Superstick lesklá</h3><p>Vyšší adheze / SuperStick.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-leskla folie-lepidlo-standard" data-name="BOPP lesklá" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Lesklá</span><span class="tag">Standard</span></div>
+                <h3>BOPP lesklá</h3><p>Standardní lepidlo.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-matna folie-lepidlo-standard" data-name="BOPP matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Matná</span><span class="tag">Standard</span></div>
+                <h3>BOPP matná</h3><p>Standardní lepidlo.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-softtouch folie-lepidlo-standard" data-name="BOPP SoftTouch fólie matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">SoftTouch</span><span class="tag">Standard</span></div>
+                <h3>BOPP SoftTouch fólie matná</h3><p>SoftTouch – sametová fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-softtouch folie-lepidlo-vyssi" data-name="BOPP SoftTouch DIGI sametově hebká fólie matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">SoftTouch DIGI</span><span class="tag">Vyšší adheze</span></div>
+                <h3>BOPP SoftTouch DIGI sametově hebká fólie matná</h3><p>SoftTouch DIGI.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-antiscuff folie-lepidlo-standard" data-name="BOPP AntiScuff nepoškrabatelná fólie matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">AntiScuff</span><span class="tag">Standard</span></div>
+                <h3>BOPP AntiScuff nepoškrabatelná fólie matná</h3><p>AntiScuff – oděruodolná.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-antiscuff folie-lepidlo-vyssi" data-name="BOPP AntiScuff DIGI nepoškrabatelná fólie matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">AntiScuff DIGI</span><span class="tag">Vyšší adheze</span></div>
+                <h3>BOPP AntiScuff DIGI nepoškrabatelná fólie matná</h3><p>AntiScuff DIGI.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-ostatni folie-lepidlo-standard" data-name="BOPP Linen fólie s povrchovou strukturou plátna" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Linen</span><span class="tag">Standard</span></div>
+                <h3>BOPP Linen fólie s povrchovou strukturou plátna</h3><p>Ostatní speciální fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-metalicka folie-lepidlo-standard" data-name="BOPP Metalická fólie lesklá s kovovým STŘÍBRNÝM vzhledem" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Metalická</span><span class="tag">Standard</span></div>
+                <h3>BOPP Metalická fólie lesklá s kovovým STŘÍBRNÝM vzhledem</h3><p>Metalická fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-ostatni folie-lepidlo-standard folie-povrch-matna" data-name="BOPP bílá potiskovatelná fólie matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Speciální</span><span class="tag">Matná</span></div>
+                <h3>BOPP bílá potiskovatelná fólie matná</h3><p>Ostatní speciální fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-bopp folie-povrch-ostatni folie-lepidlo-standard" data-name="BOPP fólie s HOLOGRAFICKÝM motivem" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">BOPP</span><span class="tag">Holografická</span><span class="tag">Standard</span></div>
+                <h3>BOPP fólie s HOLOGRAFICKÝM motivem</h3><p>Ostatní speciální fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <!-- PET -->
+            <article class="product" data-subs="folie-druh-pet folie-povrch-leskla folie-lepidlo-standard" data-name="Polyesterová fólie PET lesklá" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">PET</span><span class="tag">Lesklá</span><span class="tag">Standard</span></div>
+                <h3>Polyesterová fólie PET lesklá</h3><p>Standardní lepidlo.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-pet folie-povrch-matna folie-lepidlo-standard" data-name="Polyesterová fólie PET matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">PET</span><span class="tag">Matná</span><span class="tag">Standard</span></div>
+                <h3>Polyesterová fólie PET matná</h3><p>Standardní lepidlo.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-pet folie-povrch-matna folie-lepidlo-standard" data-name="Polyesterová fólie PET 100% matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">PET</span><span class="tag">100% matná</span><span class="tag">Standard</span></div>
+                <h3>Polyesterová fólie PET 100% matná</h3><p>Standardní lepidlo.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-pet folie-povrch-metalicka folie-lepidlo-standard" data-name="PET Metalická fólie lesklá s kovovým STŘÍBRNÝM vzhledem" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">PET</span><span class="tag">Metalická</span><span class="tag">Stříbrná</span></div>
+                <h3>PET Metalická fólie lesklá s kovovým STŘÍBRNÝM vzhledem</h3><p>Metalická fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-pet folie-povrch-metalicka folie-lepidlo-standard" data-name="PET Metalická fólie lesklá s kovovým ZLATÝM vzhledem" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">PET</span><span class="tag">Metalická</span><span class="tag">Zlatá</span></div>
+                <h3>PET Metalická fólie lesklá s kovovým ZLATÝM vzhledem</h3><p>Metalická fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <!-- FILMY AKTIVOVANÉ TLAKEM -->
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-leskla folie-lepidlo-samolepici folie-lepidlo-standard" data-name="Arctic Universal lesklá fólie bez UV" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Lesklá</span><span class="tag">Samolepící</span></div>
+                <h3>Arctic Universal lesklá fólie bez UV</h3><p>Filmy aktivované tlakem.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-matna folie-lepidlo-samolepici" data-name="Arctic Universal matná fólie bez UV" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Matná</span><span class="tag">Samolepící</span></div>
+                <h3>Arctic Universal matná fólie bez UV</h3><p>Filmy aktivované tlakem.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-leskla folie-lepidlo-samolepici" data-name="Arctic Indoor lesklá fólie bez UV" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Lesklá</span><span class="tag">Samolepící</span></div>
+                <h3>Arctic Indoor lesklá fólie bez UV</h3><p>Filmy aktivované tlakem.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-matna folie-lepidlo-samolepici" data-name="Arctic Indoor matná fólie bez UV" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Matná</span><span class="tag">Samolepící</span></div>
+                <h3>Arctic Indoor matná fólie bez UV</h3><p>Filmy aktivované tlakem.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-leskla folie-lepidlo-samolepici" data-name="UV Standard fólie lesklá" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Lesklá</span><span class="tag">Samolepící</span></div>
+                <h3>UV Standard fólie lesklá</h3><p>Filmy aktivované tlakem.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-matna folie-lepidlo-samolepici" data-name="UV Standard fólie matná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Matná</span><span class="tag">Samolepící</span></div>
+                <h3>UV Standard fólie matná</h3><p>Filmy aktivované tlakem.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-matna folie-lepidlo-samolepici" data-name="UV Standard fólie polomatná" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Polomatná</span><span class="tag">Samolepící</span></div>
+                <h3>UV Standard fólie polomatná</h3><p>Filmy aktivované tlakem.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="folie-druh-tlak folie-povrch-ostatni folie-lepidlo-samolepici" data-name="Economy mount – montážní oboustranná fólie" data-price="0">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tlakem</span><span class="tag">Speciální</span><span class="tag">Samolepící</span></div>
+                <h3>Economy mount – montážní oboustranná fólie</h3><p>Ostatní speciální fólie.</p></div>
+              <div class="pfoot"><span class="price">na dotaz</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <!-- placeholdery -->
+            <article class="product" data-subs="tonerove-efektove-folie" data-name="Tonerová efektová fólie – zlatá" data-price="490">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Tonerové efektové</span><span class="tag">Efekt</span></div>
+                <h3>Tonerová efektová fólie – zlatá</h3><p>Pro efektní tisk a zvýraznění (dle kompatibility).</p></div>
+              <div class="pfoot"><span class="price">490 Kč</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="antibakterialni-folie" data-name="Antibakteriální fólie – povrchy" data-price="1290">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Antibakteriální</span><span class="tag">Ochrana</span></div>
+                <h3>Antibakteriální fólie – povrchy</h3><p>Pro často dotýkané plochy, vhodné do provozů.</p></div>
+              <div class="pfoot"><span class="price">1 290 Kč</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
+            <article class="product" data-subs="bazar" data-name="Bazar: laminátor (použitý)" data-price="8990">
+              <div class="pimg" aria-hidden="true"></div>
+              <div class="pbody"><div class="meta"><span class="tag">Bazar</span><span class="tag">Použité</span></div>
+                <h3>Bazar: laminátor (použitý)</h3><p>Ověřený stav, dostupnost dle skladu.</p></div>
+              <div class="pfoot"><span class="price">8 990 Kč</span><a class="btn btn--ghost" href="index.html#kontakt">Kontakt</a></div>
+            </article>
+
           </div>
         </section>
       </div>
@@ -442,54 +896,57 @@
   </main>
 
   <script>
-    // Year
     document.getElementById('year').textContent = String(new Date().getFullYear());
 
-    // Elements
     const q = document.getElementById('q');
     const sort = document.getElementById('sort');
     const reset = document.getElementById('reset');
-    const catButtons = Array.from(document.querySelectorAll('.cat'));
+    const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
     const productsWrap = document.getElementById('products');
-    let products = Array.from(document.querySelectorAll('.product'));
-
-    // Cart (simple demo)
-    const cartItemsEl = document.getElementById('cartItems');
-    const cartCountEl = document.getElementById('cartCount');
-    const cartTotalEl = document.getElementById('cartTotal');
+    const products = Array.from(document.querySelectorAll('.product'));
     const countShown = document.getElementById('countShown');
 
-    let cart = [];
-    let activeCat = 'all';
+    let activeFilter = 'all';
     let query = '';
 
-    function fmtCZK(n){
-      return new Intl.NumberFormat('cs-CZ').format(n) + ' Kč';
+    function getSubs(el){
+      const raw = (el.dataset.subs || '').trim();
+      if (!raw) return [];
+      return raw.split(/\s+/g).filter(Boolean);
     }
 
     function updateBadges(){
-      const totals = { all: products.length, tech:0, lam:0, folie:0, spot:0 };
-      products.forEach(p => totals[p.dataset.cat] = (totals[p.dataset.cat] || 0) + 1);
+      const totals = {};
+      document.querySelectorAll('[data-b]').forEach(b => totals[b.getAttribute('data-b')] = 0);
+
+      products.forEach(p => {
+        const subs = getSubs(p);
+        totals.all = (totals.all || 0) + 1;
+        subs.forEach(s => totals[s] = (totals[s] || 0) + 1);
+      });
 
       document.querySelectorAll('[data-b]').forEach(b => {
         const k = b.getAttribute('data-b');
-        b.textContent = (totals[k] ?? 0);
+        b.textContent = String(totals[k] || 0);
       });
     }
 
-    function apply(){
-      const qq = query.trim().toLowerCase();
+    function matchesFilter(p){
+      if (activeFilter === 'all') return true;
+      return getSubs(p).includes(activeFilter);
+    }
 
-      // Filter
+    function apply(){
+      const qq = (query || '').trim().toLowerCase();
+
       let filtered = products.filter(p => {
-        const catOk = activeCat === 'all' || p.dataset.cat === activeCat;
+        const subOk = matchesFilter(p);
         const name = (p.dataset.name || '').toLowerCase();
         const text = (p.innerText || '').toLowerCase();
         const qOk = !qq || name.includes(qq) || text.includes(qq);
-        return catOk && qOk;
+        return subOk && qOk;
       });
 
-      // Sort
       const mode = sort.value;
       if (mode === 'name'){
         filtered.sort((a,b) => (a.dataset.name||'').localeCompare((b.dataset.name||''), 'cs'));
@@ -501,50 +958,21 @@
         filtered.sort((a,b) => Number(b.dataset.price||0) - Number(a.dataset.price||0));
       }
 
-      // Render by reordering DOM (simple)
       filtered.forEach(p => productsWrap.appendChild(p));
       products.forEach(p => p.style.display = filtered.includes(p) ? '' : 'none');
 
       countShown.textContent = String(filtered.length);
     }
 
-    function renderCart(){
-      cartItemsEl.innerHTML = '';
-      let total = 0;
-
-      cart.forEach(item => {
-        total += item.price;
-        const row = document.createElement('div');
-        row.className = 'cartItem';
-        row.innerHTML = `
-          <div class="cartThumb" aria-hidden="true"></div>
-          <div style="flex:1;">
-            <strong>${item.name}</strong>
-            <span>${fmtCZK(item.price)}</span>
-          </div>
-          <button class="btn btn--ghost" type="button" data-remove="${item.id}" style="padding:8px 10px;">✕</button>
-        `;
-        cartItemsEl.appendChild(row);
-      });
-
-      cartCountEl.textContent = String(cart.length);
-      cartTotalEl.textContent = fmtCZK(total);
-
-      cartItemsEl.querySelectorAll('[data-remove]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.getAttribute('data-remove');
-          cart = cart.filter(x => x.id !== id);
-          renderCart();
-        });
-      });
+    function setPressed(btn){
+      filterButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
     }
 
-    // Events
-    catButtons.forEach(btn => {
+    filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        catButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
-        btn.setAttribute('aria-pressed', 'true');
-        activeCat = btn.dataset.cat || 'all';
+        setPressed(btn);
+        activeFilter = btn.dataset.filter || 'all';
         apply();
       });
     });
@@ -560,24 +988,17 @@
       query = '';
       q.value = '';
       sort.value = 'reco';
-      activeCat = 'all';
-      catButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cat === 'all')));
+      activeFilter = 'all';
+
+      const allBtn = filterButtons.find(b => b.dataset.filter === 'all');
+      if (allBtn) setPressed(allBtn);
+
       apply();
     });
 
-    document.querySelectorAll('.add').forEach((btn, idx) => {
-      btn.addEventListener('click', () => {
-        const p = btn.closest('.product');
-        const name = p.dataset.name || 'Produkt';
-        const price = Number(p.dataset.price || 0);
-        cart.push({ id: name + '_' + idx + '_' + Date.now(), name, price });
-        renderCart();
-      });
-    });
-
+    // init
     updateBadges();
     apply();
-    renderCart();
   </script>
 </body>
 </html>
